@@ -72,5 +72,3 @@ CLAUDIA is made publicly available for testing and ongoing development. See the 
 - **Exclusions:** political parties, as well as associations or groups that are classified as a right-wing extremist effort by the Office for the Protection of the Constitution (federal or state) or that are banned, are excluded from using this software (details in the [LICENSE](LICENSE)).
 
 Without any warranty or guarantee of success. Changes to servers are at your own risk. vibecoded with Claude (Anthropic) by conejito-vipe with love ❤️.
-
-*(Note: This is not legal advice.)*
