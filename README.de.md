@@ -46,5 +46,3 @@ CLAUDIA wird öffentlich bereitgestellt, um sie zu testen und weiterzuentwickeln
 - **Ausschlüsse:** Politische Parteien sowie Vereine oder Gruppen, die vom Verfassungsschutz (Bund oder Land) als rechtsextremistische Bestrebung eingestuft oder verboten sind, sind von der Nutzung ausgeschlossen (Einzelheiten in der [LICENSE](LICENSE)).
 
 Ohne jegliche Gewährleistung oder Erfolgsgarantie. Änderungen am Server auf eigene Gefahr. vibecoded with Claude (Anthropic) by conejito-vipe with love ❤️.
-
-*(Hinweis: Dies ist keine Rechtsberatung.)*
