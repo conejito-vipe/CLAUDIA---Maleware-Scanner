@@ -1,0 +1,448 @@
+## 2.10.1 | 2026-11-20 | Lizenz
+### Lizenz neu gefasst
+Was: Die Lizenz (LICENSE, LIZENZ.txt, Abschnitt in den READMEs) ist neu: kostenlos nur für Privatpersonen und gemeinnützige Organisationen, keine kommerzielle Nutzung, keine Änderung und keine Weitergabe ohne Zustimmung des Urhebers. Parteien und Gruppen, die vom Verfassungsschutz als rechtsextremistische Bestrebung eingestuft oder verboten sind, sind ausgeschlossen. Die Fußzeile heißt jetzt "vibecoded" und nennt conejito-vipe.
+Warum: Die bisherige Freeware-Lizenz erlaubte berufliche Nutzung, Änderung und Weitergabe. Das ist nicht mehr gewollt. Die Anknüpfung an den Verfassungsschutz macht den Ausschluss nachprüfbar.
+Wie: Reine Text-Änderung; am Programm und an den Prüfungen ändert sich nichts. Grenze: Das ist keine Rechtsberatung.
+## 2.10.0 | 2026-11-19 | TYPO3
+### TYPO3-Seiten werden erkannt und geprüft
+Was: CLAUDIA erkennt jetzt TYPO3 (ab Version 11, klassische und Composer-Installation; ältere Versionen werden erkannt und als nicht mehr unterstützt gemeldet) und zeigt eigene Prüfungen: Kern (Version, Support-Ende, Sicherheitsmeldungen, Vergleich aller Dateien der Systemerweiterungen mit dem Original-Paket von get.typo3.org), Einstellungsdatei (settings.php und additional.php: auffällige Befehle, Fehlerausgabe, devIPmask, trustedHostsPattern, Schlüssellänge, Passwortverfahren, Schreibrechte, freigeschaltetes Install-Tool), frei abrufbare Dateien und Install-Tool, Erweiterungen (Sicherheitsmeldungen von Packagist, überholte Erweiterungen, Entwicklungs-Erweiterungen, eigene Pakete), Backend-Administratoren und Code in Inhalten und Templates. Dazu laufen die allgemeinen Prüfungen, die nichts Systemspezifisches lesen.
+Warum: TYPO3-Seiten werden genauso angegriffen wie Joomla, WordPress und Drupal, meist über veraltete Erweiterungen. Typische Spuren sind ein neues Administrator-Konto, ein Skript in einem Inhaltselement und ein dauerhaft freigeschaltetes Install-Tool.
+Wie: Alles ist rein lesend. Die Einstellungsdatei wird nur als Text gelesen und nie ausgeführt; Datenbank-Zugangsdaten, Verschlüsselungsschlüssel und Install-Tool-Passwort werden nie angezeigt oder gespeichert. Für TYPO3 gibt es noch keine Lösungen auf Knopfdruck und keine Sicherheits-Erweiterungen zum Installieren; das kommt nur nach ausdrücklicher Freigabe in einem späteren Release. Grenzen: Antwortformate von get.typo3.org und Packagist sowie Tabellen- und Feldnamen von TYPO3 sind noch nicht gegen einen echten Server geprüft; fehlt etwas, meldet die Prüfung 'nicht prüfbar'. Ein TYPO3-Logo wird nicht angezeigt, weil keine freigegebene Quelle vorliegt.
+### Intern
+Was: Die Prüfung der Erweiterungsliste und die Abschnittsmarken der Server-Ausgabe wurden mit einer nachgebauten TYPO3-Testwelt (klassisch und Composer) abgesichert. Der Autorenname im Programm und in der Doku lautet jetzt conejito-vipe.
+Warum: Ein Abschnittsmarker in der Server-Ausgabe hätte die Erweiterungsliste nach der ersten Erweiterung abgeschnitten; das fiel erst im Test auf.
+Wie: Reine Korrektur und Test; am Verhalten der übrigen Prüfungen ändert sich nichts.
+## 2.9.0 | 2026-11-18 | Mac-Unterstützung
+### CLAUDIA läuft auch auf dem Mac
+Was: Neue Startdatei start.command für macOS (Doppelklick im Finder). Sie sucht Python 3.9 oder neuer, richtet fehlendes Python automatisch ein (offizieller Installer von python.org, Signatur geprüft, macOS fragt nach dem Mac-Passwort) und startet CLAUDIA. Programmdaten liegen unter ~/Library/Application Support/CLAUDIA, Berichte unter ~/Documents/CLAUDIA/Berichte. Das Programmfenster hat auf dem Mac den normalen Fensterrahmen, das CLAUDIA-Symbol erscheint im Dock, Fehlermeldungen kommen als Mac-Fenster, und die Deinstallation nennt den Weg, das von start.command installierte Python zu entfernen.
+Warum: Auch Mac-Nutzer sollen ihre Seiten prüfen können, ohne etwas von Hand einzurichten. Windows und die Prüfungen bleiben unverändert.
+Wie: Das Programm startet sich auf Mac und Linux in einer eigenen Sitzung, damit es ein geschlossenes Terminal-Fenster überlebt. Das Release-Paket legt start.command mit Ausführrecht ab. Neue Tests prüfen die Startdatei (Syntax, Python-Suche), die Speicherorte, die Browser-Suche, das Fenster und das Paket; GitHub prüft zusätzlich auf einem macOS-Rechner. Grenze: Auf einem echten Mac ist das noch nicht getestet; Fenster, Dock-Symbol und die Python-Einrichtung zeigt erst dein Praxistest.
+## 2.8.1 | 2026-11-18 | Automatischer Testlauf auf GitHub
+### Intern
+Was: Der automatische Testlauf auf GitHub ist repariert. Unter Linux läuft die ganze Testsuite, unter Windows nur die Auswahl aus tests/windows_tests.txt (Start, Fenster, Deinstallation, Icons, Berichte, Dokumentation). Die Tests funktionieren jetzt auch als normaler Benutzer (nicht nur als Administrator), lassen sich von einem auf dem Rechner echt installierten PHP nicht mehr beeinflussen, und Pillow sowie Python 3.9 werden im Testlauf richtig eingerichtet; die Browser-Tests laufen nur unter Python 3.13.
+Warum: Die Tests bauen einen Linux-Server nach (Linux-Befehle, Linux-Dateirechte), weil CLAUDIA dem Webserver Linux-Befehle schickt. Unter Windows kann das nicht gelingen. Der Lauf war deshalb rot, obwohl am Programm nichts kaputt war.
+Wie: Reine Test- und Werkzeug-Änderung; am Programm und an den Prüfungen ändert sich nichts. Grenze: Der Windows-Lauf ersetzt den Praxistest mit echtem Fenster und start.bat nicht.
+## 2.8.0 | 2026-11-17 | Drupal
+### Drupal-Seiten werden erkannt und geprüft
+Was: CLAUDIA erkennt jetzt Drupal (ab Version 8; Drupal 7 wird erkannt und als nicht mehr unterstützt gemeldet) und zeigt eigene Prüfungen: Kern (Version, Sicherheitsupdates, Vergleich aller Dateien im Ordner core mit dem Original-Paket von drupal.org), settings.php (auffällige Befehle, update_free_access, trusted_host_patterns, Schreibrechte), frei abrufbare Dateien und Schnittstellen (settings.php, composer-Dateien, JSON:API, Installationsseite, Ordnerlisten), Module und Themes (Sicherheitsupdates, unsichere und nicht mehr betreute Versionen laut drupal.org), Administrator-Konten, Einstellungen in der Datenbank (Fehlermeldungen, offene Registrierung, Entwicklungsmodule, Rechte der Rolle der Besucher) und Code in Beiträgen, Blöcken und Kommentaren. Dazu laufen die allgemeinen Prüfungen, die nichts Systemspezifisches lesen (Webshells, PHP in Uploads, Rechte, Cronjobs, Zugriffsprotokolle, Header u. a.).
+Warum: Drupal-Seiten werden genauso angegriffen wie Joomla und WordPress, meist über veraltete Module. Die Muster (neues Administrator-Konto, Code in Inhalten, manipulierte Kerndateien) sind dieselben.
+Wie: Alles ist rein lesend. Die Verbindung zur Datenbank nutzt die Zugangsdaten aus der settings.php; sie werden nie angezeigt oder gespeichert. Für Drupal gibt es noch keine Lösungen auf Knopfdruck und keine Sicherheits-Erweiterungen zum Installieren; das kommt nur nach ausdrücklicher Freigabe in einem späteren Release. Grenzen: Antwortformat von updates.drupal.org sowie Tabellen- und Feldnamen von Drupal sind noch nicht gegen einen echten Server geprüft; fehlt etwas, meldet die Prüfung 'nicht prüfbar'. Das Drupal-Logo wird nicht angezeigt, weil keine freigegebene Quelle vorliegt.
+### Intern
+Was: Der Umbau auf Profile (2.6.0) trägt jetzt ein drittes System; die Auswahl der gemeinsamen Prüfungen je System steht im Profil. Ein neuer Test-Läufer (tools/run_tests.py) wiederholt scheiternde, bekannt flackernde Tests zweimal und vermerkt das im Ergebnis.
+Warum: Mehr Systeme brauchen eine einheitliche Stelle für ihre Besonderheiten, und flackernde Tests sollen weder echte Fehler verdecken noch den Lauf unnötig scheitern lassen.
+Wie: Reiner Umbau und Test-Werkzeug; am Verhalten der Prüfungen ändert sich nichts. Das Ergebnis eines Laufs steht in tests/ERGEBNIS.txt, offene flackernde Tests nennen den Befehl für eine manuelle Wiederholung.
+## 2.7.0 | 2026-11-17 | WooCommerce-Prüfungen
+### Neue Prüfungen für Onlineshops mit WooCommerce
+Was: Ist auf einer WordPress-Seite WooCommerce installiert, kommen sechs Prüfungen dazu: Überblick (installiert, aktiv, Datenbank-Update ausgeführt), API-Schlüssel (verwaiste, nie benutzte, lange unbenutzte und solche mit Schreibrecht), Webhooks (aktive Webhooks, die Bestell- oder Kundendaten an Auffang-Adressen, reine IP-Adressen oder unbekannte Empfänger senden), Zahlungsarten (eingeschaltete Zahlungsarten, Testmodus, Programmcode in Titeln und Beschreibungen), Konten mit der Rolle Shop-Manager (neu angelegte fallen auf) und frei abrufbare Shop-Daten (Bestell- und Kunden-Schnittstelle ohne Anmeldung, Protokolle und Ordnerlisten).
+Warum: Ein Shop sammelt Kundendaten und Zahlungen und wird deshalb gezielt angegriffen. Typische Spuren sind ein heimlich angelegter API-Schlüssel, ein Webhook, der jede Bestellung kopiert, oder ein Skript im Beschreibungstext einer Zahlungsart. Diese Dinge stehen in der Datenbank und werden von einer reinen Dateisuche nicht gefunden.
+Wie: Alles ist rein lesend. Schlüssel, Geheimwörter und Zugangsdaten der Zahlungsanbieter werden nie ausgegeben oder gespeichert. Ohne WooCommerce werden die Prüfungen mit einem Hinweis übersprungen. Die Prüfungen stehen im Bereich "Plugins & Themes" in einem eigenen Abschnitt "Onlineshop (WooCommerce) prüfen" und im Maßnahmenplan bei den Zugängen. Grenze: Die Namen der WooCommerce-Tabellen und -Einträge sind gegen einen echten Shop noch nicht geprüft; fehlt eine Tabelle, meldet die Prüfung "nicht prüfbar" statt zu raten. Zapier, Make und Slack (Adressen aus der offiziellen Dokumentation der Anbieter) geben nur einen Hinweis, weil ihre Adressen vielen Kunden gehören und nicht sagen, wem das Konto gehört. Empfänger von Webhooks, die Sie kennen, tragen Sie unter den erlaubten Adressen ein.
+## 2.6.0 | 2026-11-17 | Umbau auf Profile je System
+### Profile je System
+Was: Alles, was sich zwischen Joomla und WordPress unterscheidet (Namen, Ordner, Pflichtmodule, Hinweise zum Einschalten, Store, Version, Verzeichnisse für Sicherheits-Erweiterungen), steht jetzt an einer Stelle im Profil des Systems. Die Prüfungen, der Bericht und der Server lesen dort nach, statt eigene Fallunterscheidungen zu haben.
+Warum: Weitere Systeme (zum Beispiel WooCommerce, Drupal, TYPO3) lassen sich später ergänzen, indem man ein Profil anlegt, ohne an vielen Stellen im Programm zu suchen.
+Wie: Reiner Umbau, das Verhalten ist gleich geblieben. Die bestehenden Tests liefen unverändert durch; neu ist ein Test, der prüft, dass jedes Profil vollständig ist. Stellen, die wirklich anders arbeiten (zum Beispiel das Lesen der Konfiguration und die WordPress-eigenen Prüfungen), bleiben vorerst getrennt.
+## 2.5.0 | 2026-11-16 | Radar, neue Prüfungen, Hoster-Liste, Oberfläche
+### Radar-Anzeige während der Prüfung
+Was: Zusätzlich zu den Texten zeigt die laufende Prüfung ein Radar. Jeder Test ist ein Punkt, der beim Ergebnis aufleuchtet; die gerade laufende Prüfung ist hervorgehoben, kritische Funde erscheinen kräftig in Bernstein.
+Warum: Wer das Fenster nebenbei offen lässt, sieht auf einen Blick, wie weit die Prüfung ist und ob etwas Auffälliges dabei ist.
+Wie: Die Anzeige ist nur eine Zugabe und ändert keine Ergebnisse. Bei "Animationen reduzieren" in Windows erscheint ein ruhiges Standbild.
+### Neue Prüfung: DNS-Änderungen
+Was: Die Prüfung "DNS-Änderungen seit der gespeicherten Basis" vergleicht Nameserver, Mail-Server, Adresse der Webseite, SPF und DMARC mit einem Stand, den du früher gespeichert hast, und meldet entfernte und neue Einträge.
+Warum: Wer Konto oder Domain übernimmt, ändert oft DNS-Einträge, zum Beispiel für Phishing-Mails oder Weiterleitungen. Eine Abweichung vom gespeicherten Stand fällt sofort auf.
+Wie: Es werden nur öffentliche DNS-Einträge über den Server abgefragt und nur mit deinem Häkchen auf deinem Computer gespeichert. Ist ein Eintrag nicht abfragbar, wird er nicht verglichen.
+### Vergleich mit der Basis: .htaccess und .user.ini
+Was: Änderungen an .htaccess- und .user.ini-Dateien erscheinen im Vergleich immer als eigener Befund, auch wenn sich bei einem Update viele andere Dateien ändern.
+Warum: In diesen Dateien lassen sich Weiterleitungen und vor jede Seite geladener Fremdcode verstecken. Bisher gingen sie bei vielen Änderungen in der Masse unter.
+Wie: Neue .htaccess-Dateien in Upload-Ordnern bleiben weiterhin ein eigener, kritischer Befund.
+### Neue Prüfungen: Joomla-Einstellungen, Umgebung, Mailversand
+Was: Joomla-Einstellungen aus der Datenbank (Textfilter, erlaubte Upload-Endungen, Registrierung, Zwei-Faktor-Anmeldung, Admin-Anmeldungen, Alter der Erweiterungen), WordPress-Zwei-Faktor, Klartext-Zugangsdaten, Alter der letzten Sicherung, TLS-Versionen, Cookie-Schutz, veraltete JavaScript-Bibliotheken und der Mailversand (eingeschränkt: Absender, Mailprotokoll, Warteschlange).
+Warum: Viele Einfallstore liegen in Einstellungen und nicht in Dateien. Offene Registrierung, fehlende Zwei-Faktor-Anmeldung oder eine uralte Sicherung fallen sonst nicht auf.
+Wie: Nur lesend. Die Feldnamen der Joomla-Tabellen wurden nur gegen nachgebildete Daten geprüft, nicht gegen eine echte Joomla-Datenbank. Neue Gruppe "Joomla-Einstellungen".
+### Hoster-Liste statt Maßnahmenplan
+Was: Der Bereich "Maßnahmenplan (Empfehlung)" entfällt, weil er die Hinweise darunter doppelte. Neu ist eine Liste aller Punkte, die nur der Hoster ändern kann, samt vorbereiteter Mail an den Support. Im Bericht steht sie ebenfalls.
+Warum: Einstellungen wie gesperrte PHP-Funktionen, PHP-Version oder Mailserver lassen sich im Programm nicht ändern. Die Liste spart das Zusammensuchen.
+Wie: Die Texte sind Vorschläge; bitte vor dem Absenden lesen. "Zuerst ein Rückweg" steht jetzt rot, die Abstände vor "Warnung" und "Sicherung vorher" sind einheitlich.
+### Klarere Befunde
+Was: Zugriffsprotokolle: Abgewehrte oder nicht gefundene Zugriffe sind überall grün, erfolgreiche rot. Reste abgebrochener Updates: Es wird nach update.php gesucht (extract.php gehört zum Joomla-Kern). Fehlende Paketdateien (zum Beispiel 1082 PHP-Dateien) werden erklärt und nach Installationsdateien getrennt. SPF mit ?all wird erklärt. "Gefährliche Funktionen" zeigt, welche Erweiterungen sie verwenden. Unbekannte Datei im Kernordner: Die rote Markierung zeigt die Stelle, eindeutige Zuordnung eigene/fremde Datei.
+Warum: Befunde sollen eindeutig sein und erklären, was zu tun ist.
+Wie: Die Zuordnung von extract.php beruht auf einem Schluss (gleiche Änderungszeit wie ein Kerndatei) und wurde nicht an einer echten Installation geprüft.
+### Oberfläche
+Was: Deinstallations-Dialog neu aufgebaut (Schließen-Knopf oben rechts, Knöpfe unten fest, gleiche Größe wie im Hauptfenster, nichts ragt über die Bildlaufleiste). Logo bündig mit der Linie unter der Navigation. Link zur Anleitung für den kostenlosen Safe-Browsing-Schlüssel im Startformular und im Befund; Adressen in Befunden sind anklickbar. Empfehlungen für Erweiterungen: erst kostenlos, dann unter eigener Überschrift kostenpflichtig. Das Hilfefenster bleibt während der Prüfung bedienbar und verschiebbar. Ordner früherer Versionen werden beim Start übernommen (umbenannt, sonst kopiert und geprüft).
+Warum: Wunschliste vom 16.11.
+Wie: Nur unter Linux im Browser getestet, noch nicht im Windows-Fenster.
+## 2.4.1 | 2026-11-14 | Härtung, Integrität, Maßnahmenplan, weniger Fehlalarme
+### Härtung per Knopfdruck
+Was: Neue Aktionen für fehlende Sicherheits-Header, HSTS (rot markiert, mit zweiter Bestätigung), Ordnerlisten, XML-RPC (WordPress) und Dateirechte. Neu ist auch die Aktion "Joomla-API (Web-Services) abschalten".
+Warum: Viele Einfallstore sind keine Schadsoftware, sondern offene Türen, die sich mit wenigen Änderungen schließen lassen.
+Wie: Jede Aktion zeigt vorher die Befehle, legt eine geprüfte Sicherung an, bricht ohne gültige Sicherung ab und nennt den Rückweg (meist rueckgaengig.sql oder rueckgaengig.txt).
+### Integrität von Themes und Erweiterungen
+Was: Neue Prüfungen vergleichen WordPress-Themes und Joomla-Erweiterungen mit dem Originalpaket des Herstellers. Dazu kommt die Prüfung "E-Mail-Schutz (SPF, DMARC, DKIM)".
+Warum: Eine veränderte Datei in einem Theme oder einer Erweiterung ist ein häufiger Weg für Hintertüren, und fehlender E-Mail-Schutz erleichtert Betrug im Namen der Seite.
+Wie: Nur lesend. Die Vergleiche wurden bisher nur mit nachgebildeten Antworten getestet, nicht gegen echte Server.
+### Maßnahmenplan und Erinnerung
+Was: Das Ergebnis zeigt einen Maßnahmenplan in sinnvoller Reihenfolge (erst sichern, dann Schadcode entfernen, dann Zugänge erneuern). Nach 14 Tagen erinnert das Programm an einen neuen Vergleich mit der gespeicherten Basis.
+Warum: Passwörter vor dem Entfernen des Schadcodes zu erneuern, hilft nicht. Und ein alter Vergleich sagt wenig über den heutigen Zustand.
+Wie: Der Plan ist eine Empfehlung und kein Beweis, dass die Seite sauber ist. Die Erinnerung braucht keinen Hintergrunddienst.
+### Weniger Fehlalarme, klarere Farben
+Was: Entwicklungsdateien von Bibliotheken im Joomla-Kern und Zuweisungen in Sicherheits-Erweiterungen lösen keinen kritischen Fund mehr aus. Treffer ohne Befehl sind grün. In der Angriffsliste sind abgewehrte Versuche grün, nur erfolgreiche rot.
+Warum: Zu viele rote Meldungen verdecken die echten.
+Wie: Fundstellen mit Befehl bleiben rot. Die Erkennung beruht weiter auf bekannten Mustern.
+### Sicherheits-Erweiterung und Sicherungsordner
+Was: Die Empfehlung einer Sicherheits-Erweiterung steht nur noch oben. Sicherungsordner auf dem Server heißen jetzt claudia-sicherung-... (Quarantäne: claudia-quarantaene-...); Ordner früherer Versionen bleiben sichtbar und löschbar.
+Warum: Der Name soll zum Programm passen, und die Empfehlung soll nicht doppelt erscheinen.
+Wie: Direkt installierbar sind WordPress-Erweiterungen und bei Joomla die kostenlosen Securitycheck, HTProtect und Admin Tools Core (Update-Server laut Manifest des Pakets, nur gegen nachgebildete Antworten getestet). Die übrigen Joomla-Erweiterungen bleiben ein Link zur Store-Seite.
+### Programmfenster, Start und Deinstallation
+Was: Das Fenster öffnet mittig, lässt sich in der Größe ändern und wird mit dem X beendet. Die Hilfe hat ein X. Der rote Knopf "Deinstallieren" steht über der Fußzeile. start.bat richtet Python selbst ein und legt eine Verknüpfung mit Symbol an. Hat start.bat Python von python.org installiert, nennt die Deinstallation den Windows-Weg zum Entfernen.
+Warum: Wer ohne Python-Erfahrung startet, soll nicht ohne Ergebnis dastehen.
+Wie: Nur unter Linux getestet, noch nicht unter Windows.
+### Hinweis zu Windows und Virenschutz
+Was: README und Handbuch weisen darauf hin, dass Windows oder ein Virenschutz CLAUDIA als Schadsoftware melden kann.
+Warum: CLAUDIA baut SSH-Verbindungen auf, und genau das erkennen Schutzprogramme.
+Wie: Das Programm verbindet sich nur, wenn du es willst, und nur verschlüsselt.
+## 2.4.0 | 2026-11-11 | Neue Prüfungen, zwei neue Aktionen, neues Aussehen
+### Vergleich mit gespeicherter Basis
+Was: Neue Prüfung "Vergleich mit gespeicherter Basis". Sie berechnet SHA-256-Prüfsummen aller PHP-, JS- und .htaccess-Dateien und listet die Upload-Ordner. Verglichen wird mit einem Lauf, den du früher selbst gespeichert hast; gemeldet werden neue, geänderte und gelöschte Dateien. Eine neue PHP-Datei in einem Upload-Ordner ist kritisch.
+Warum: Gegen einen Zustand, den du für sauber hältst, fällt jede Abweichung auf, auch wenn der Code selbst unauffällig aussieht.
+Wie: Gespeichert wird nur mit gesetztem Häkchen und nur auf deinem Computer (Pfade und Prüfsummen, keine Inhalte, keine Zugangsdaten). Im Ergebnis zeigt die Prüfung, ob eine Basis vorhanden ist, und bietet "Basis löschen" an. Ehrliche Grenzen: Nach einem Update ändern sich viele Dateien (ab 150 Änderungen meldet die Prüfung "vermutlich ein Update"); speichere die Basis dann neu. Auf Shared Hosting kann der Lauf einige Minuten dauern (Belastung "hoch", höchstens 30.000 Dateien bis 2 MB).
+### Plugins gegen das Original prüfen (WordPress)
+Was: Neue Prüfung "Plugin-Dateien gegen das Original prüfen". Für jedes installierte Plugin ruft das Programm die veröffentlichten Prüfsummen von wordpress.org ab und vergleicht sie mit den Dateien auf dem Server.
+Warum: Ein verändertes Plugin ist ein häufiger Weg für Hintertüren, auch wenn die Versionsnummer unauffällig ist.
+Wie: Geänderte PHP-Dateien sind kritisch, zusätzliche PHP-Dateien eine Warnung, fehlende Dateien ein Hinweis. Plugins ohne Prüfsummen (Premium, nicht auf wordpress.org) werden als "nicht prüfbar" gemeldet. Es werden einzelne Abrufe nacheinander gemacht, höchstens 60 Plugins (einstellbar). Ehrliche Grenze: Die Auswertung ist gegen Beispieldaten getestet, nicht gegen die Live-Schnittstelle.
+### Skimmer-Suche (Kartendaten-Diebstahl)
+Was: Neue Prüfung "Skimmer-Suche". Sie sucht in Dateien nach Code, der Kartenfelder ausliest und an eine fremde Adresse sendet.
+Warum: Skimmer in Online-Shops stehlen Zahlungsdaten und fallen kaum auf.
+Wie: Gemeldet wird nur, wenn Kartenfelder, ein Sendeaufruf und eine fremde Adresse in derselben Datei vorkommen (eigene Adresse, bekannte Zahlungsanbieter und eine eigene Liste sind ausgenommen). Verschleierter Code ist kritisch, sonst Warnung; verschleierte Skript-Lader werden als Hinweis gelistet. Ehrliche Grenze: Das ist eine Mustersuche und kein Beweis; ein Shop mit eigener Zahlungsanbindung kann einen Treffer auslösen.
+### Weitere Installationen: Schnellscan
+Was: Die Prüfung "Weitere Webseiten auf demselben Webspace" kann auf Wunsch jede gefundene Installation kurz untersuchen (Optionen: Schnellscan, Auswahl der Namen, Zeitgrenze).
+Warum: Eine vergessene Zweitseite ist oft die Einbruchstelle für den ganzen Webspace.
+Wie: Höchstens 10 Installationen, nur lesend: PHP in Upload-Ordnern (kritisch), Hintertür-Muster (Warnung), veraltete Version (Warnung).
+### Joomla-API ohne Anmeldung (CVE-2023-23752)
+Was: Neue Prüfung "Joomla-API: Konfiguration ohne Anmeldung". Ein einzelner Abruf von diesem PC aus, nur bei Joomla 4.0.0 bis 4.2.7 oder unbekannter Version.
+Warum: Die Lücke gibt jedem Besucher die Datenbank-Zugangsdaten und wird massenhaft ausgenutzt.
+Wie: Die Antwort wird nie angezeigt oder gespeichert; gemeldet wird nur, ob Zugangsdaten sichtbar sind.
+### Sicherungen anderer Tools: Abruf von außen
+Was: Die Prüfung "Sicherungs-Tool vorhanden?" prüft zusätzlich, ob die Sicherungen von Akeeba, UpdraftPlus u. a. von außen abrufbar sind.
+Warum: Eine öffentlich abrufbare Sicherung enthält Datenbank und Zugangsdaten; sie kann außerdem den Befall enthalten.
+Wie: Je Speicherordner ein einzelner Abruf der neuesten Datei, nur die ersten Bytes, der Inhalt wird nie gezeigt.
+### Genauere Dateiprüfungen
+Was: Die Hintertür-Suche findet jetzt auch PHP-Code in Dateien, die wie Bilder oder Textdateien aussehen (Bildkopf mit PHP dahinter, include auf Bild- oder Textdateien). "Kürzlich geänderte Dateien" wertet zusätzlich die Statusänderung (ctime) aus, höchstens als Hinweis oder Warnung.
+Warum: Angreifer tarnen Code als Bild. Und das Änderungsdatum lässt sich fälschen, die Statusänderung nicht so leicht.
+Wie: Dateigröße ist begrenzt. Nach "Schreibrecht für alle entfernen" ändert sich die ctime vieler Dateien; das Ergebnis weist darauf hin.
+### Weniger Fehlalarme durch bekannte Erweiterungen
+Was: Dateien bekannter Sicherheits- und Sicherungs-Erweiterungen werden nicht mehr als Hintertür gemeldet.
+Warum: Früher genügte ein Stichwort im Pfad; eine Hintertür namens akeeba.php im Bilder-Ordner wäre durchgerutscht.
+Wie: Die Positivliste (known_tools.json, mit Stand-Datum) gilt nur, wenn der Pfad im Ordner der Erweiterung liegt UND der Inhalt deren Kennung enthält.
+### Neue Aktion: .htaccess im Hauptordner zurücksetzen
+Was: Ersetzt die .htaccess im Hauptordner durch die Standarddatei (Joomla: htaccess.txt aus dem geprüften Original-Paket, WordPress: Standardblock). Harmlose eigene Regeln und Blöcke bekannter Plugins werden auf Wunsch übernommen.
+Warum: Eine manipulierte .htaccess leitet Besucher um oder führt Code aus, ohne dass eine Datei auffällt.
+Wie: Die Vorschau zeigt jede Änderung als Vergleich (rot = entfällt, grün = neu). Auffällige Regeln und auto_prepend_file werden nicht übernommen. Die alte Datei liegt als htaccess.vorher im Sicherungsordner, dazu rueckgaengig.txt. Danach ruft das Programm die Startseite ab; bei einem Serverfehler wird der alte Stand sofort hergestellt.
+### Neue Aktion: Eingeschleusten Code in der Datenbank entfernen
+Was: Entfernt aus den von dir gewählten Datenbank-Einträgen genau die Skript- und Frame-Blöcke, die die Prüfung als schädlich oder verdächtig eingestuft hat. Der Rest des Eintrags bleibt.
+Warum: Schadcode in Artikeln, Modulen und Optionen kehrt sonst nach jedem Aufräumen der Dateien zurück.
+Wie: Vorschau je Eintrag; vorher wird der alte Wert jedes Eintrags als UPDATE-Befehl in rueckgaengig.sql gesichert und geprüft, ohne gültige Sicherung bricht die Aktion ab. Nicht angefasst werden serialisierte WordPress-Werte, Werte über 1 MB und Einträge ohne eindeutigen Treffer; der Grund steht im Ergebnis. Danach Cache leeren und neu prüfen.
+### Joomla-Erweiterungen aus dem Verzeichnis: Installation nur mit geprüfter Adresse
+Was: Das Programm installiert eine Joomla-Erweiterung nur, wenn der Hersteller eine öffentliche Update-Adresse (https) anbietet, die Erweiterung kostenlos ist und der Eintrag ein Stand-Datum trägt. Sonst zeigt die Karte den Link zum Verzeichnis und eine Anleitung "Von URL installieren".
+Warum: Eine nicht geprüfte Adresse soll nie unbemerkt zu einer Installation führen.
+Wie: Derzeit ist nur Akeeba Backup so hinterlegt; weitere Adressen werden erst nach Prüfung aufgenommen.
+### Neues Aussehen: Start-, Programm- und Deinstallationsfenster
+Was: Start-, Deinstallations- und Programmfenster haben dasselbe Aussehen: rahmenlos mit abgerundeten Ecken, Schatten, orangem Namensfeld "CLAUDIA", Logo, schmalem orangem Fortschrittsbalken. Neues Logo und neues Favicon. Das Programmfenster hat eine eigene Titelleiste mit Minimieren, Maximieren und Schließen. Im Programmfenster steht der Name CLAUDIA als orange Schrift ohne Feld; Logo und Name sind auf der Seite um 40 % größer. Der Name wird überall CLAUDIA geschrieben (Oberfläche, Berichte, Dokumentation). Ordner- und Dateinamen auf dem PC (z. B. %APPDATA%\Claudia) bleiben unverändert, damit vorhandene Profile gefunden werden. Die frühere Zeile mit dem Akronym unter dem Namen entfällt.
+Warum: Ein einheitlicher, ruhiger Auftritt; das Startfenster zeigt den Fortschritt in Prozent.
+Wie: Das Startfenster benutzt PySide6 (Paket PySide6-Essentials, etwa 80 MB, wird beim ersten Start in der Python-Umgebung eingerichtet). Beim allerersten Start läuft diese Einrichtung noch in der Konsole, weil PySide6 erst danach vorhanden ist. Schlägt die Einrichtung fehl, nutzt das Programm ein einfaches tkinter-Fenster im gleichen Farbton (ohne Schatten und runde Ecken). Beim Deinstallieren kann die laufende Python-Umgebung nicht selbst gelöscht werden; ein unsichtbarer Helfer entfernt sie, sobald das Fenster zu ist. Ehrliche Grenzen: Die Fenster sind unter Windows noch nicht von uns getestet. Mit der Umgebungsvariable CLAUDIA_NO_FRAMELESS bekommt das Programmfenster wieder den normalen Rahmen, mit CLAUDIA_NO_QT bleibt das Startfenster in tkinter.
+### Zähler: Zeilen reinen Python-Codes
+Was: Die Fußzeile zeigt hinter dem Vermerk "vibecoded by conejito-vipe with love" die Anzahl der Zeilen reinen Python-Codes.
+Warum: Ein ehrlicher Einblick in den Umfang des Programms.
+Wie: tools/count_loc.py zählt mit dem Python-Parser nur Zeilen mit Code, ohne Leerzeilen, Kommentare und Docstrings, in claudia/ und tools/ (ohne Tests). Der Release-Bau schreibt den Wert in claudia/loc.json.
+## 2.3.3 | 2026-11-10 | Quarantäne-Ordner im Programm löschen
+### Neue Aktion: Quarantäne-Ordner auf dem Server löschen
+Was: Zeigt die Quarantäne-Ordner dieser Seite (~/claudia-quarantaene-...) mit Anzahl der noch enthaltenen Dateien, Größe und Ursprungspfaden. Die angehakten Ordner werden samt Inhalt und Liste gelöscht. Es ist nichts vorausgewählt.
+Warum: Bisher ließ sich eine Quarantäne nur von Hand per SFTP entfernen. Schadcode soll nicht dauerhaft auf dem Server liegen bleiben, wenn klar ist, dass nichts zurückgeholt werden muss.
+Wie: Die Vorschau zeigt je Ordner den Befehl rm -rf. Das Skript prüft je Ordner: Name passt, liegt im Home-Verzeichnis, ist kein Verweis, enthält die Liste QUARANTAENE.txt und gehört laut Liste zu dieser Seite. Sonst wird er übersprungen; fremde Ordner, Ordner anderer Seiten und Verweise werden nie angefasst. Danach wird kontrolliert, dass der Ordner weg ist. Ehrliche Grenzen: Gelöscht ist endgültig, es gibt keinen Rückweg und keine Sicherung (einzelne Dateien vorher mit "Dateien aus der Quarantäne zurückholen" retten). Ein vollständig zurückgeholter, leerer Ordner erscheint ebenfalls in der Liste.
+## 2.3.2 | 2026-11-10 | Quarantäne: Verschieben und Zurückholen
+### Hintertüren in Quarantäne verschieben statt löschen
+Was: Die Aktion "Hintertüren und PHP-Dateien in images" löscht nichts mehr. Die angehakten Dateien werden in einen Quarantäne-Ordner ~/claudia-quarantaene-<Datum> außerhalb des Web-Ordners verschoben (Rechte 700). In der Quarantäne liegen sie ohne Ausführrecht (600) und ohne die Endung .php, als d/<Nr>.q. Die Liste QUARANTAENE.txt hält je Datei Ursprungspfad, Rechte, Besitzer, Größe, Datum und SHA-256 fest.
+Warum: Eine gelöschte Datei ist weg, auch wenn sie zu Unrecht gemeldet wurde. Ein Verschieben lässt sich umkehren und belegt, was entfernt wurde.
+Wie: Die Liste wird vor dem Verschieben geschrieben, die Prüfsumme nach dem Verschieben verglichen. Sonderfälle: Verweise (Symlinks) und Dateien in Ordnern, die über einen Verweis aus der Seite hinausführen, werden übersprungen; die Nummer macht gleiche Dateinamen aus verschiedenen Ordnern eindeutig; liegt die Quarantäne auf einem anderen Dateisystem, wird kopiert, die Prüfsumme verglichen und erst dann das Original entfernt (sonst bleibt es); Dateien mit weiteren festen Verknüpfungen (Hardlinks) werden verschoben, ein Hinweis nennt die übrigen Namen. Liegt das Home-Verzeichnis im Seitenordner, bricht die Aktion ohne Änderung ab. Ehrliche Grenzen: Den Webroot des Hosters kennt das Programm nicht; geprüft wird nur, ob das Home-Verzeichnis im Seitenordner liegt (zusätzlich liegt eine Zugriffssperre im Quarantäne-Ordner). Die frühere Archiv-Sicherung dateien.tgz entfällt; die Quarantäne selbst ist die Sicherung. Alte Quarantäne-Ordner löscht das Programm nicht; das geht von Hand per SFTP.
+### Neue Aktion: Dateien aus der Quarantäne zurückholen
+Was: Zeigt die Dateien in den Quarantäne-Ordnern dieser Seite (nichts vorausgewählt), zeigt vorab eine Vorschau mit den Befehlen und holt nach deiner Bestätigung die angehakten Dateien an ihren Ursprungsort zurück, mit den ursprünglichen Rechten.
+Warum: Eine zu Unrecht verschobene Datei (z. B. eine eigene) soll ohne Handarbeit zurückkommen.
+Wie: Je Datei wird vorher geprüft: liegt noch in der Quarantäne, gehört zu dieser Seite, SHA-256 gleich der Liste, Ursprungsordner vorhanden, beschreibbar und in der Seite, Ursprungsort leer. Liegt dort schon etwas (auch ein Verweis), wird genau diese Datei übersprungen; nie wird etwas überschrieben und nie ein Ordner angelegt. Die Angaben stammen aus der Liste auf dem Server, nicht aus der Auswahl. Das Protokoll steht in ZURUECK.txt. Ehrliche Grenzen: Den Besitzer kann das Programm ohne Administratorrechte nicht setzen (Hinweis im Ergebnis); die Aktion stellt auch echte Schadsoftware wieder her, wenn du sie auswählst.
+## 2.3.1 | 2026-11-09 | Liste beim Entfernen, PHP-Sperre, Kontrolle danach, CSP-Prüfung
+### Hintertüren entfernen: Auswahl je Datei und Liste mit Prüfsummen
+Was: Beim Entfernen von Hintertüren und PHP-Dateien im Bilder-Ordner hakst du selbst an, welche Dateien weg sollen. Neben dem gesicherten Archiv liegt jetzt die Datei QUARANTAENE.txt mit SHA-256, Größe, Rechten, Änderungsdatum und Pfad jeder entfernten Datei.
+Warum: So bleibt nachvollziehbar, was entfernt wurde, und Dateien, die du kennst, bleiben unberührt.
+Wie: Nur angehakte Dateien werden gesichert (dateien.tgz, wird gezählt), gelistet und gelöscht; Dateien außerhalb der Seite oder ohne Meldung der Prüfung werden ignoriert. Ehrliche Grenze: Das ist ein geprüftes Archiv mit Liste, kein Verschieben in einen Quarantäne-Ordner; zurückholen geht per tar (Befehl steht in der Liste), eine Rückhol-Funktion im Programm gibt es nicht.
+### PHP-Ausführung im Bilder-Ordner sperren
+Was: Neue Aktion: Im Ordner images (WordPress: wp-content/uploads) wird eine .htaccess angelegt oder ergänzt, die PHP-Dateien dort sperrt. Danach prüft das Programm per https mit zwei harmlosen Testdateien (.txt und .php), ob die Sperre wirkt und Bilder weiter ausgeliefert werden.
+Warum: Ein Bilder-Ordner braucht kein PHP; eine eingeschleuste Hintertür dort läuft dann nicht mehr, bis die Einbruchstelle geschlossen ist.
+Wie: Vorschau mit dem genauen Inhalt, vorher Kopie einer vorhandenen .htaccess (htaccess.vorher) und rueckgaengig.txt. Wirkt die Sperre nicht, macht sie Fehler oder ist der Abruf nicht möglich, wird der alte Stand sofort wiederhergestellt; die Testdateien werden immer gelöscht. Ehrliche Grenzen: Nur für Apache und kompatible Server (nginx ignoriert .htaccess, das erkennt der Test); die https-Adresse der Seite muss eingetragen sein; die Sperre ersetzt nicht das Entfernen der Hintertüren. Getestet gegen einen nachgebildeten Webserver, nicht gegen eine echte Seite.
+### Kontrolle nach der Aktion
+Was: Nach einer erfolgreichen Aktion führt das Programm die dazugehörigen Prüfungen noch einmal aus (nur lesend) und zeigt im Ergebnis „Vorher“ und „Jetzt“ (Anzahl kritischer Befunde und Warnungen).
+Warum: Du siehst sofort, ob die Aktion gewirkt hat, ohne die ganze Prüfung zu wiederholen.
+Wie: Jeder Aktion sind eine oder zwei Prüfungen zugeordnet (z. B. Hintertüren entfernen: webshells und php_in_uploads). Verglichen wird mit dem Stand der letzten Prüfung in dieser Sitzung. Ehrliche Grenzen: Gezählt werden Befunde, nicht Dateien (bleibt ein Eintrag einer Sammelmeldung übrig, bleibt die Zahl gleich); der gespeicherte Prüfbericht bleibt unverändert; ohne vorherige Prüfung in der Sitzung gibt es keinen Vergleich; Updates und Sicherungen haben keine Kontrolle.
+### Schreibschutz und Dateiwächter
+Was: Aktionen, die Dateien ändern, prüfen vorher, ob die Ordner beschreibbar sind, und brechen sonst ohne Änderung ab. In der Vorschau steht ein Hinweis auf Dateiwächter.
+Warum: Ein Schreibschutz (Rechte, Sicherheits-Erweiterung, Hoster) lässt Änderungen scheitern oder macht sie wieder rückgängig; besser, du erfährst es vorher.
+Wie: Test auf Schreibrecht im Ordner. Ehrliche Grenze: Einen Dateiwächter selbst erkennt das Programm nicht sicher; der Hinweis ist allgemein.
+### Neue Prüfung: Content-Security-Policy (CSP)
+Was: Das Programm prüft, ob eine CSP gesetzt ist (Kopfzeile oder <meta>-Tag), zeigt jede Regel und erklärt einzeln, was sie bewirkt, und nennt Schwächen. Ist keine gesetzt, erklärt es den Nutzen und erzeugt aus den Adressen deiner Startseite einen Vorschlag für die .htaccess (zuerst im Testmodus Report-Only).
+Warum: Eine CSP kann eingeschleusten Schadcode im Browser deiner Besucher blockieren, statt ihn auszuführen. Sie ersetzt keine Updates, ist aber eine wirksame zweite Verteidigungslinie.
+Wie: Ein einzelner Abruf der Startseite, nur lesend; der Vorschlag wird nur angezeigt. Ehrliche Grenzen: Der Vorschlag beruht nur auf der Startseite (Unterseiten, Zahlungsanbieter, Karten, Statistik können mehr brauchen); der Verwaltungsbereich braucht meist lockerere Regeln; die Syntax der CSP wird erklärt, nicht vollständig validiert; getestet gegen einen nachgebildeten Webserver.
+### Dokumentation: Tech Doku, gemeinsame Stile, Leerzeilen
+Was: Der Bereich heißt jetzt „Tech Doku“. Im Änderungsverlauf steht vor Warum und Wie eine Leerzeile, wie im restlichen Hilfebereich. Alle Stile der Dokumentation stehen in einer Datei (docs.css) mit Variablen für Abstände, Farben und Schrift am Anfang.
+Warum: Ein einheitliches Bild und weniger doppelter Stil-Code.
+Wie: docs.css wird vom Hilfe-Fenster und von der eigenständigen HTML-Datei gemeinsam verwendet.
+## 2.3.0 | 2026-11-09 | Konten und Erweiterungen sperren, Fundstellen im Code, Herkunft der Angriffe
+### Verdächtige Konten sperren, Dauerzugänge widerrufen, Sitzungen beenden
+Was: Drei neue Aktionen: Benutzerkonten sperren (Joomla: block=1; WordPress: Rollen entziehen und Passwort entwerten), API-Tokens bzw. Anwendungs-Passwörter ausgewählter Benutzer löschen, alle gespeicherten Sitzungen beenden. Du wählst die Einträge selbst in der Liste aus.
+Warum: Ein Passwortwechsel allein beendet weder die Sitzung eines Angreifers noch seinen Token; ein von ihm angelegtes Konto bleibt sein Dauerzugang.
+Wie: Vorschau mit den genauen Befehlen, ausdrückliche Bestätigung, vorher Sicherung der betroffenen Tabelle (ohne gültige Sicherung wird abgebrochen), bei Sperren und Ausschalten zusätzlich eine Rückgängig-Datei im Sicherungsordner. Der letzte aktive Administrator kann nicht gesperrt werden. Ehrliche Grenzen: Der Speicherort der Joomla-Tokens ist durch die API-Dokumentation von Joomla 4.2 belegt; Joomla 5 und 6 wurden nicht einzeln gegen den Quelltext geprüft (die Prüfung meldet abweichende Schreibweisen als Gegenprobe). Sitzungen werden nicht gesichert, weil sie kurzlebig sind. Auch du wirst abgemeldet.
+### Verwundbare Erweiterung oder Plugin ausschalten
+Was: Eine Erweiterung (Joomla) bzw. ein Plugin (WordPress) mit bekannter Sicherheitslücke lässt sich mit einem Klick ausschalten, bis ein Update verfügbar ist.
+Warum: Solange die verwundbare Komponente läuft, kann der Angreifer nach dem Aufräumen zurückkommen; Ausschalten schließt die Tür sofort.
+Wie: Joomla: Tabelle extensions (enabled = 0), WordPress: WP-CLI (plugin deactivate). Vorher Sicherung und Rückgängig-Datei. Der Joomla-Kern, Anmelde- und Zwei-Faktor-Erweiterungen sowie erkannte Sicherheits- und Sicherungs-Erweiterungen werden nie ausgeschaltet. Ehrliche Grenze: Die Dateien bleiben liegen und sind weiter angreifbar; aktualisieren oder löschen bleibt nötig.
+### Fundstellen mit Datei, Zeile und rot markiertem Code
+Was: Bei Schadcode-Mustern, Datenbank-Treffern und unbekannten Dateien in Kernordnern zeigt das Ergebnis den genauen Ort und den Code der Umgebung in einem schwarzen Code-Fenster; die Treffer-Stelle ist rot markiert. Auch im TXT- und HTML-Bericht.
+Warum: Ein Hinweis ohne Ort lässt sich nicht beurteilen; so siehst du selbst, ob es Schadcode oder ein harmloser Treffer ist.
+Wie: Zu jeder Fundstelle werden je 2 Zeilen davor und danach gelesen (höchstens 30 Stellen, 300 Zeichen pro Zeile), nur lesend; der Code wird angezeigt, nie ausgeführt. Ehrliche Grenze: Bei sehr langen Zeilen wird gekürzt; die Markierung zeigt den Treffer, nicht die ganze Schadfunktion.
+### Genauere Bewertung bei Mustern, Hex-Folgen und Kernordnern
+Was: Zusammengesetzte Funktionsnamen werden nach Form unterschieden (Namensliste in einer Sicherheits-Erweiterung wie htprotect ist ein Hinweis, ein Aufruf mit zusammengesetztem Namen ein Fund). Lange \x..-Folgen werden entschlüsselt: nur wenn ein Befehl darin steht, wird gewarnt (Binärdaten in Krypto-Bibliotheken sind harmlos). Zusätzliche Dateien in Kernordnern werden getrennt: Programmdateien (PHP) kritisch bzw. Warnung mit Code, reine Text- und Konfigurationsdateien (README, XML, JSON) nur als Hinweis; Dateien, die zu einer installierten Erweiterung gehören, sind als solche gekennzeichnet.
+Warum: Vorher erzeugten harmlose Dateien offizieller Erweiterungen und Krypto-Bibliotheken Alarm, der echte Funde verdeckte.
+Wie: Form (Liste oder Aufruf), Ort, Herkunft der Datei und entschlüsselter Inhalt entscheiden, nicht das Wort allein. Ehrliche Grenze: Hex-Befehle werden erst ab 8 Hex-Paaren erkannt; ob eine Datei unverändert ist, kann das Programm nicht prüfen (Empfehlung: Erweiterung über den Updater neu installieren).
+### Herkunft der Angreifer mit Länderflagge
+Was: Bei "Häufigste Absender" steht vor der IP die Flagge des Landes, in dem das Netz registriert ist.
+Warum: Zeigt auf einen Blick, woher Scans kommen.
+Wie: Offizielle RDAP-Auskunft der fünf Regional-Registries (ARIN, RIPE NCC, APNIC, LACNIC, AFRINIC), die Adresse wird über die IANA-Liste bestimmt; abgefragt wird nur das gekürzte Netz (letztes Byte unkenntlich), nie die volle IP. Ehrliche Grenzen: Das ist das Registrierungsland, nicht der genaue Standort; die Abfrage wurde im Entwicklungsumfeld nur mit nachgebildeten Antworten getestet, nicht live. Flaggen: Twemoji Country Flags (Schrift: MIT; Grafik: CC BY 4.0, Twitter/X und Mitwirkende).
+### Offizielle Logos, Profilname, Preise und Sterne
+Was: Im Verbindungsfenster steht neben dem CMS-Namen dessen offizielles Logo. Unter "verbunden" steht erst der Profilname, dann die Serveradresse. Installierbare Werkzeuge sind als kostenlos bzw. kostenpflichtig gekennzeichnet und, wenn WordPress.org sie liefert, mit ihrer Bewertung.
+Warum: Schneller erkennbar, was du vor dir hast und ob etwas Geld kostet.
+Wie: Die Logos werden zur Laufzeit von den offiziellen Servern geladen und unverändert angezeigt, nicht mitgeliefert. Quellen: extensions.joomla.org und de.wordpress.org/plugins gelten als geprüft; die Auswahl ist bewusst klein. Ehrliche Grenzen: Ob die Marken-Richtlinie von Joomla ein Logo in Programmen erlaubt, ist nicht geklärt; konkrete JED-Preise werden nicht angezeigt; das Programm vertraut bekannten Sicherheits- und Sicherungs-Erweiterungen, fragt aber nicht jede beliebige Erweiterung bei JED ab; die Element-Kennung von Akeeba Backup für Joomla ist nicht gegen eine Installation geprüft.
+### Deinstallation in eigenem Fenster
+Was: Der Knopf "Deinstallieren" sitzt unten rechts; die Deinstallation läuft in einem eigenen Fenster in Größe und Aufbau des Startfensters, die Auswahl ist lesbar.
+Warum: Das Programm kann sich nicht selbst löschen, während es läuft.
+Wie: Ein eigener Prozess aus einer Kopie im Temp-Ordner wartet, bis CLAUDIA beendet ist, löscht nur die ausgewählten Dinge (Pfadprüfung) und entfernt Python als Letztes mit winget in einer eigenen Konsole. Ehrliche Grenze: Dieses Fenster (Tk) konnte im Entwicklungsumfeld nicht gestartet werden; getestet sind Planung, Pfadschutz und Ablauf mit Attrappen. Fehlt tkinter, läuft die Deinstallation in der Konsole.
+### Hilfebereich als ein Bereich, Statusfenster ohne Scroll-Fehler
+Was: "Prüfkatalog, Aktionen und Technik" ist ein Bereich mit Inhaltsverzeichnis, Sprungmarken und "zurück zum Inhaltsverzeichnis" bei jedem Eintrag. Jeder Eintrag erklärt erst Was und Warum, dann Wie, dann der Code in einem eingeklappten schwarzen Fenster mit grüner Schrift und Kopieren-Knopf. Einheitlicher Stil mit Leerzeile nach Aufzählungen und vor Zwischenüberschriften. Im Fenster für Serverbefehle springt das Statusfenster nach oben-Scrollen nicht mehr fest, und "Zum aktuellen Stand" führt zurück nach unten.
+Warum: Ein roter Faden für Laien und Profis; der Fehler verhinderte, dem laufenden Befehl zu folgen.
+Wie: Der Bereich wird aus Prüfungen, Aktionen und Programmcode erzeugt; die Scroll-Position wurde vor dem Neuzeichnen ausgelesen statt danach.
+### Nicht in 2.3.0
+Was: Aus dem Plan sind vier Punkte noch offen: PHP-Sperre im Upload-Ordner per .htaccess mit Web-Test und Rückgängig, Quarantäne mit Liste und Auswahl einzelner Dateien beim Entfernen von Web-Shells, automatische Prüfung vor und nach einer Aktion, Schutzliste mit Nur-Lesen-Hinweis.
+Warum: Sie ändern Dateien auf dem Server; sie sollen erst erscheinen, wenn Vorschau, Sicherung und Rückgängig gründlich getestet sind.
+Wie: Geplant für 2.3.1.
+## 2.2.0 | 2026-11-08 | Konto & Dauerzugänge, Technik-Kapitel, Sicherungs-Tool, Support-Ende
+### Technik-Kapitel in der Dokumentation
+Was: Neuer Reiter "Technik" mit den echten Befehlen, Datenbankabfragen, Skripten, Konstanten und Funktionen hinter jeder Prüfung und Aktion, dazu eine Erklärung in einfachen Worten und die Grundlagen (Verbindung, Skript-Ausführung, Datenbankzugriff, Sicherung).
+Warum: Wer dem Programm Zugriff auf einen Server gibt, soll jeden Schritt nachlesen und prüfen können.
+Wie: Der Code wird beim Erzeugen der Dokumentation aus dem Programmcode gelesen (nicht abgeschrieben) und ist deshalb immer aktuell. Durchsuchbar, mit Kopieren-Knöpfen, im Programm und in der HTML-Datei. Ehrliche Grenze: Die Erklärungstexte sind von Hand geschrieben; ein Test stellt sicher, dass jede Prüfung und Aktion einen hat.
+### Sicherungen verständlicher und geschützt
+Was: Die Vorschau jeder Aktion sagt, was gesichert wird (voll, gezielt, nur Protokoll oder keine). Jede Sicherung enthält eine MANIFEST.txt. Liegt der Sicherungsordner im öffentlichen Bereich der Seite, wird er geschützt und es gibt eine Warnung.
+Warum: Eine Sicherung im Webordner kann Zugangsdaten und Schadcode enthalten und darf nie aus dem Internet erreichbar sein.
+Wie: Zufallsnamen, .htaccess mit Sperre, index.html, Hinweis im Ergebnis. Ehrliche Grenze: Nicht jeder Server beachtet die .htaccess; der Ordner sollte außerhalb des Webspaces liegen.
+### Neue Gruppe "Konto & Dauerzugänge"
+Was: Prüft Cronjobs, SSH-Schlüssel, laufende Prozesse, Start-Dateien der Shell, angemeldete Sitzungen, WordPress-Cron und die Joomla-API mit Tokens.
+Warum: Angreifer setzen sich oft außerhalb der Seitendateien fest; kein Datei-Scan findet das.
+Wie: Nur lesend. Rohtexte werden nicht gespeichert, Passwörter maskiert, von SSH-Schlüsseln nur Fingerabdrücke, von Tokens nur die Anzahl. Ehrliche Grenzen: ps, crontab und ssh-keygen sind je nach Hoster gesperrt (dann meldet die Prüfung ihre Grenze); Cronjobs im Kundenbereich des Hosters sind nicht sichtbar; der Speicherort der Joomla-Tokens ist nicht gegen jede Version geprüft.
+### Support-Ende von Joomla und WordPress
+Was: Meldet, wenn die installierte Joomla-Reihe keine Sicherheitsfixes mehr bekommt oder bald nicht mehr bekommt; bei WordPress, wie weit die Reihe hinter der neuesten liegt.
+Warum: Auf einer Reihe ohne Sicherheitsfixes bleibt jede neue Lücke offen.
+Wie: Vergleich mit einer Liste (Quelle endoflife.date, Stand angegeben). Ehrliche Grenze: Die Termine wurden nicht gegen jede Ankündigung des Projekts einzeln geprüft; WordPress hat keine festen Fristen.
+### Sicherungs-Tool erkennen und installieren
+Was: Das Programm erkennt Akeeba Backup, UpdraftPlus, Duplicator, BackWPup und WPvivid und ob sie eingeschaltet sind. Fehlt eines, bietet es die Installation mit denselben Karten und derselben Vorschau wie bei Sicherheits-Erweiterungen an.
+Warum: Ohne Sicherung bleibt nach einem Hack oder fehlgeschlagenen Update nur der Neuaufbau.
+Wie: WordPress per WP-CLI mit Einschalten und Prüfsummenkontrolle, vorher Sicherung und Bestätigung. Joomla: nur Link und Anleitung, weil keine geprüfte öffentliche Update-Adresse hinterlegt ist. Ehrliche Grenze: Es wird nicht geprüft, wann zuletzt gesichert wurde und wo die Sicherungen liegen.
+### Schutz auf Server-Ebene und .htaccess-Blöcke
+Was: Hinweise auf Server-Schutz (z. B. ModSecurity, Imunify360) und BulletProof Security werden erkannt. In der .htaccess werden Blöcke von bekannten Programmen gekennzeichnet; unbekannte Blöcke werden aufgelistet.
+Warum: Wer Schutz durch den Hoster hat, soll nicht fälschlich "kein Schutz" lesen; Regeln von Plugins sollen von Fremdregeln unterscheidbar sein.
+Wie: Der Inhalt jedes Blocks wird weiter geprüft; ein Block-Name mildert keine Bewertung, weil auch ein Angreifer seine Regeln in einen solchen Block schreiben kann.
+## 2.1.0 | 2026-11-07 | Eigenes Programmfenster, Zugangsschutz, Sicherheits-Erweiterungen, Aktionskatalog
+### Ein Fenster statt Browser-Tab
+Was: CLAUDIA läuft in einem eigenen Programmfenster. Das Startfenster erscheint nur beim Start und schließt sich, sobald das Programmfenster geladen ist. Danach ist genau ein Fenster offen; Schließen beendet das Programm.
+Warum: Ein Browser-Tab wirkt wie eine Webseite, bleibt offen und kann versehentlich neu geöffnet oder von anderen Seiten angesprochen werden.
+Wie: Reihenfolge der Wege: eigenes Fenster mit pywebview (Edge-Engine von Windows), sonst Edge/Chrome im App-Modus mit eigenem Temp-Profil, zuletzt der normale Browser mit Lebenszeichen (Programm endet nach 90 Sekunden ohne Lebenszeichen). Beim Schließen während einer Prüfung wird nachgefragt.
+### Einmal-Startschlüssel statt Token in der Seite
+Was: Der Zugang gelingt nur über einen Startschlüssel, der einmal und höchstens 120 Sekunden gilt und nur an das eigene Fenster geht. Danach gilt ein Cookie (HttpOnly, SameSite=Strict). Die Seite enthält keinen Schlüssel mehr.
+Warum: Ein Token im Seitentext kann von anderen Skripten gelesen werden; ein normaler Browser-Tab hätte die Seite einfach öffnen können.
+Wie: Der Server tauscht den Schlüssel gegen ein Sitzungs-Cookie und verlangt für jede API-Anfrage Cookie und Kopfzeile X-Claudia. Höchstens 4 Sitzungen. Ehrliche Grenze: Wer den Programmcode auf dem PC ändert, wird dadurch nicht aufgehalten.
+### Bremse bei falschen Anmeldungen
+Was: Nach 5 fehlgeschlagenen Anmeldungen am Server gibt es 10 Minuten Pause; zwischen zwei Versuchen mindestens 1,5 Sekunden.
+Warum: Verhindert, dass das Programm als Passwort-Rater gegen einen Server missbraucht wird.
+Wie: Zähler im Programm, Fehlermeldung 429 mit Erklärung.
+### Startfenster lesbar
+Was: Das Startfenster nutzt dunklen Hintergrund und die Schrift der Kommandozeile (Consolas bzw. eine andere Festbreitenschrift).
+Warum: Die vorherige Schrift war schlecht lesbar.
+Wie: Die erste verfügbare Schrift aus Consolas, Cascadia Mono, Lucida Console, DejaVu Sans Mono, Courier New wird genommen.
+### Sicherheits-Erweiterung installieren
+Was: Fehlt auf dem Server eine Firewall oder ein Scanner, zeigt das Programm Karten mit Bild, Kurzbeschreibung und Link zur Store-Seite und bietet die Installation an.
+Warum: Ohne Schutzschicht bleibt die Seite zwischen Bekanntwerden einer Lücke und dem Update angreifbar.
+Wie: WordPress per WP-CLI aus wordpress.org mit Einschalten und Prüfsummenkontrolle. Joomla nur kostenlose Erweiterungen mit öffentlicher Update-Adresse (https), sonst nur Store-Link. Immer Vorschau, Bestätigung und vorherige Sicherung. Bilder werden an den Bytes geprüft (kein SVG) und nur von festen Hosts geladen.
+### Aktionskatalog in der Dokumentation
+Was: Neuer Reiter "Aktionen" mit Was, Wie (die Befehle), Warum, Warnung, Rückweg, Risiko und Sicherung zu jeder Aktion; durchsuchbar, im Programm und in der HTML-Datei.
+Warum: Wer Änderungen am Server erlaubt, soll vorher nachlesen können, was genau passiert.
+Wie: Der Katalog wird aus den Aktionsdefinitionen des Programms erzeugt und ist deshalb immer aktuell.
+### Deinstallation kennt pywebview
+Was: Der Eintrag "Eigene Python-Umgebung" nennt jetzt auch das Fenster-Bauteil pywebview.
+Warum: pywebview liegt in derselben Umgebung und wird mit ihr entfernt.
+Wie: Gleicher Löschweg wie zuvor.
+## 2.0.1 | 2026-11-06 | Korrekturen aus echten Läufen, Deinstallation, Härtung
+### Update-Anzeige nie mehr falsch beruhigend
+Was: "Keine Updates" erscheint nur noch, wenn die Suche nachweislich funktioniert hat. Sonst steht dort "Ergebnis nicht verlässlich" mit den Gründen.
+Warum: Auf einer echten Seite meldete das Programm "keine Updates", obwohl fünf Erweiterungen veraltet waren. Die Joomla-Kommandozeile kann still scheitern.
+Wie: Das Ergebnis der Kommandozeile wird mit der Tabelle #__updates, dem Zeitstempel der Update-Quellen und einer Gegenprobe verglichen. Die Gegenprobe fragt von diesem PC aus jeden Update-Server einzeln per https ab (nacheinander, mit Pause, höchstens 60 Server) und vergleicht die Versionen.
+### PHP-Auswahlprogramm bei Hostern
+Was: Auf manchen Servern ist "php" nur ein Auswahlprogramm ("Multiple PHP versions found"). Das Programm sucht jetzt ein echtes PHP und benennt den Fall.
+Warum: Vorher wurden daraus falsche kritische Befunde (Syntaxfehler, fehlende Module, falsche Einstellungen).
+Wie: Jeder Kandidat wird mit "php -v" geprüft; nur eine echte Versionszeile zählt. Ohne brauchbares PHP wird nichts bewertet, sondern erklärt, warum.
+### Syntaxfehler mit Erklärung
+Was: Der Befund nennt Zeile, PHP-Meldung, die betroffene Zeile (Geheimnisse maskiert), den Grund und wie eine gültige Zeile aussieht.
+Warum: "Syntaxfehler" allein hilft nicht beim Beheben.
+Wie: Auswertung der Ausgabe von php -l; als kritisch gilt nur ein echter PHP-Parse-Fehler.
+### PHP-Module erklärt
+Was: Zu zip, json, mbstring, xml, openssl usw. steht, wofür sie gebraucht werden. "Fehlt" wird nur gemeldet, wenn das PHP der Webseite sicher gemessen wurde.
+Warum: Die Kommandozeilen-PHP kann andere Module haben als der Webserver.
+Wie: Version der Kommandozeile und der Webseite werden verglichen; bei Abweichung nur ein Hinweis. Das Zertifikat (z. B. Let's Encrypt) ist von OpenSSL in PHP unabhängig; das steht jetzt dabei.
+### Bedrohungslage nur für Installiertes
+Was: Meldungen erscheinen nur zu Erweiterungen, die auf dem Server vorhanden sind. Die allgemeine Liste neuester Meldungen entfällt.
+Warum: Meldungen zu fremden Produkten erzeugten Fehlalarme und Unruhe.
+Wie: Abgleich über Hersteller/Produkt aus der Meldung; allgemeine Wörter wie "joomla" oder "system" zählen nie als Treffer.
+### SQL-Installationsskripte nur bei Auffälligkeit
+Was: Die SQL-Dateien bekannter Erweiterungen werden nicht mehr aufgelistet. Es erscheint nur eine Warnung, wenn ein Skript etwas Unpassendes enthält, mit genauer Begründung.
+Warum: Normale Installationsskripte sind harmlos und verwirrten.
+Wie: Inhaltsprüfung auf Benutzer-/Rechte-Änderungen, PHP-Code, Dateizugriffe, Datenbank-Konten und zentrale Einstellungen.
+### Bewertungen als Sterne
+Was: Die JED-Bewertungen werden als Sternreihe gezeigt, in der Oberfläche und im Bericht.
+Warum: Der reine Text war schwer lesbar.
+Wie: Der Anteil gefüllter Sterne folgt der Bewertung; die Zahl steht daneben.
+### Google-Safe-Browsing-Schlüssel in den Verbindungsdaten
+Was: Der Schlüssel lässt sich direkt im Verbindungsformular eintragen.
+Warum: Die Funktion war nur tief in den Prüfungsoptionen zu finden.
+Wie: Das Feld steht unter den Verbindungsdaten; der Schlüssel bleibt im Arbeitsspeicher, wird nie gespeichert und nie in Berichte geschrieben. An Google geht nur die Adresse der Seite.
+### Deinstallation
+Was: Knopf "Deinstallieren" im Programm und im Startfenster. Er zeigt alles, was das Programm auf dem PC angelegt hat, und löscht nur Angehaktes.
+Warum: Es fehlte ein sauberer Weg, die eigene Python-Umgebung, den Zwischenspeicher und Python selbst wieder zu entfernen.
+Wie: Liste mit Größe und Erklärung, Bestätigung, dann löscht ein sichtbares Skript nach dem Beenden. Verbindungen, Berichte und der Programmordner sind nie vorgewählt; Python nur, wenn start.bat es selbst installiert hat.
+### Größeres Hilfefenster, Fußzeile, US-Englisch
+Was: Das Hilfefenster ist etwa doppelt so groß. Fußzeile: "vibecoded by conejito-vipe with love". Englisch ist jetzt US-Englisch mit US-Flagge.
+Warum: Wunsch aus der Nutzung.
+Wie: Fenstergröße in app.css, Texte in claudia/lang/en.json.
+### Härtung nach Sicherheitsprüfung des Codes
+Was: Mehrere Angriffsflächen geschlossen.
+Warum: Der geprüfte Server kann selbst manipuliert sein und gezielt gebaute Daten liefern.
+Wie: Schadstellen-Suche ohne verschachtelte Suchmuster (kein Dauerlauf bei gebauten Dateien); Datenbankname, Präfix, Benutzer und Host aus der Konfiguration werden streng geprüft (keine Optionen, kein SQL); Rückfall auf veraltete SSH-Verfahren nur nach ausdrücklicher Bestätigung; Windows-Gerätenamen (nul, con, com1) in gesicherten Protokollen entschärft; Einstellungen und Zwischenspeicher atomar geschrieben; Anfrage-Token wird vor dem Lesen des Inhalts geprüft, Größen- und Zeitlimit, zusätzliche CSP-Regeln; ungenutzter Code entfernt.
+## 2.0.0 | 2026-11-05 | CLAUDIA: neuer Name, WordPress, Englisch, viele neue Prüfungen
+### Neuer Name, Logo und Claim
+Was: Das Programm heißt jetzt CLAUDIA, mit eigenem technischen Logo.
+Warum: Das Programm prüft nicht mehr nur Joomla und braucht einen eigenen, merkbaren Namen.
+Wie: Paket claudia, Startdatei start.bat, Logo in Oberfläche und Bericht.
+### WordPress-Bereich
+Was: Eigene Erkennung und eigene Prüfungen und Aktionen für WordPress, im gleichen Aufbau wie bei Joomla.
+Warum: Viele Seiten laufen mit WordPress und haben andere Einfallstore (Plugins, mu-plugins, Anwendungspasswörter).
+Wie: Wird WordPress erkannt, erscheint der WordPress-Bereich automatisch; Kern-Prüfsummen kommen von api.wordpress.org.
+### Englisch mit Flaggen
+Was: Oberfläche, Berichte und Dokumentation gibt es auf Deutsch und Englisch; Umschalten über Flaggen oben rechts.
+Warum: Mehr Menschen sollen das Programm nutzen können; weitere Sprachen sollen leicht hinzukommen.
+Wie: Sprachdateien in claudia/lang (nur abweichender Text), Werkzeug tools/i18n.py zum Anlegen, Prüfen und Abgleichen.
+### Technische Symbole
+Was: Statt bunter Emoticons zeigen Oberfläche und Berichte einfache, technische Symbole.
+Warum: Einheitliches, ruhiges Bild, das sich auch drucken lässt.
+Wie: Symbolsatz in claudia/icons.json, im HTML-Bericht als SVG.
+### Nur verschlüsselte Verbindungen
+Was: SSH/SFTP und https; die Art der Verschlüsselung steht in der Verbindungsanzeige.
+Warum: Zugangsdaten und Berichte dürfen nie unverschlüsselt übertragen werden.
+Wie: Schwache Verfahren werden gemeldet; es gibt keinen unverschlüsselten Weg.
+### Joomla-Kern gegen Original-Prüfsummen, Kern neu einspielen
+Was: Veränderte, zusätzliche und fehlende Kerndateien werden gefunden; eine Aktion spielt den Kern neu ein.
+Warum: Manipulierte Kerndateien sind eine häufige Hintertür und mit bloßem Auge nicht zu erkennen.
+Wie: Vergleich mit dem offiziellen Paket der installierten Version; ersetzt werden nur Kerndateien, nach Sicherung und mit Bestätigung.
+### PHP-Einstellungen, Konfigurationsdatei, Safe Browsing
+Was: Prüfung gefährlicher PHP-Einstellungen, der Integrität der Konfigurationsdatei und (mit eigenem Schlüssel) der Google-Safe-Browsing-Listen.
+Warum: Unsichere Einstellungen und eingeschleuste Zeilen in der Konfiguration sind typische Folgen eines Hacks.
+Wie: PHP-Werte über die Kommandozeile gelesen (die Webseite kann abweichen); der API-Schlüssel wird maskiert und nie gespeichert.
+### Bedrohungslage, Malware-Muster, versteckte Strukturen, .htaccess
+Was: Vor jedem Lauf werden aktuelle Einträge (Joomla Vulnerable Extensions List, NVD/CVE) eingelesen; neue Muster für bekannte Hintertüren, versteckte Dateien und auffällige .htaccess-Regeln.
+Warum: Angriffe ändern sich laufend; versteckte Dateien und manipulierte .htaccess sind häufige Verstecke.
+Wie: Eingebaute Listen mit Stand plus Online-Abfrage; ohne Internet bleibt der eingebaute Stand aktiv.
+### Sicherheits-Erweiterung und Empfehlungen
+Was: Prüfung, ob eine Firewall- oder Sicherheits-Erweiterung installiert ist; sonst Empfehlungen mit Bewertungen aus dem Joomla Extensions Directory.
+Warum: Prüfen allein schützt nicht; eine laufende Schutzschicht fehlt oft.
+Wie: Bewertungen mit Stand und Rundungshinweis (security_tools.json).
+### Update-Tauglichkeit und Aufräumen alter Sicherungen
+Was: Prüfung, ob sich Joomla/WordPress automatisch aktualisieren lässt; alte Sicherungen und alte Aktionsprotokolle lassen sich löschen (jeweils die neueste bleibt).
+Warum: Fehlgeschlagene Updates haben meist Rechte-, Speicher- oder Modulgründe; Sicherungen füllen sonst den Webspace.
+Wie: Karte "Updates" und Aktion "Alte Sicherungen löschen" (nur Ausgewähltes).
+
+## 1.5.1 | | Updates oben, Wiederholungen, grüne Originalzeile
+### Update-Karte und Wiederholungen
+Was: Eigene Karte "Updates" oben im Ergebnis; fehlgeschlagene Erweiterungs-Updates werden bis zu 3-mal erneut versucht.
+Warum: Manche Erweiterungen brauchen erst eine andere; Updates sind das Wichtigste nach einem Vorfall.
+Wie: Jeder Versuch steht im Statusfenster; Erweiterungen ohne Kommandozeilen-Installer (z. B. OSMap) zeigen Download-Adresse und Backend-Weg.
+### Originalzeile in Grün, JCE über die Datenbank, images/tmp
+Was: Bei Joomla-Kerndateien steht die Originalzeile grün unter der roten Schadzeile; schädliche JCE-Profile lassen sich direkt am Befund löschen; images/tmp wird nur genannt, wenn es existiert.
+Warum: Weniger Rätselraten beim Bereinigen; keine Meldungen über Ordner, die es nicht gibt.
+Wie: Abruf des Originals von GitHub durch deinen PC; JCE-Löschung mit Vorschau und Sicherung.
+### Freeware-Fußzeile
+Was: Neuer Text: Freeware, ohne Gewährleistung, Änderungen auf eigene Gefahr.
+Warum: Klare Aussage zu Haftung und Verwendung.
+Wie: Fußzeile der Oberfläche und LIZENZ.txt.
+
+## 1.5 | | Cluster, Datenbank-Bereich, Reihenfolge der Lösungen
+### Prüfungen in Clustern
+Was: Zusammengehörige Prüfungen stehen in einer Klammer mit Beschreibung des Vorgehens.
+Warum: Übersicht über das, was ein Vorgehen abdeckt.
+Wie: "Cluster auswählen/abwählen" schaltet alle um.
+### Bereich "Datenbank" (optional)
+Was: Eigene Verbindung, Rechte-Prüfung, Suche nach eingeschleustem Code in allen Textspalten, Aufbau-Auffälligkeiten, aktuelle Vorfälle.
+Warum: Viele Angriffe liegen in der Datenbank, nicht in Dateien.
+Wie: Nur lesende SELECT-Abfragen; das Passwort bleibt im Arbeitsspeicher.
+### Lösungen in empfohlener Reihenfolge
+Was: Nummerierte Schritte mit "Warum jetzt?", Temp-Ordner, alte Sicherungen, JCE ohne Sicherung als bewusste Ausnahme, Schadcode-Ausschnitte.
+Warum: Die Reihenfolge entscheidet, ob neue Hintertüren entstehen.
+Wie: Es erscheinen nur Schritte, die für die Seite nötig sind.
+### Eine Startdatei, PHP-Erkennung
+Was: Nur noch start.bat; die PHP-Version wird erkannt statt eingetragen.
+Warum: Weniger Fehlbedienung.
+Wie: Erkennung aus Webantwort, .htaccess und Prozessen.
+
+## 1.4 | | Startbildschirm, Erweiterungs-Updates, Statusfenster
+### Startbildschirm mit Fortschritt
+Was: Statt eines schwarzen Fensters zeigt ein Startfenster jeden Schritt mit Prozentwert.
+Warum: Man sieht, dass etwas passiert.
+Wie: Der Prozentwert ist eine Schätzung nach festen Gewichten.
+### Erweiterungs-Updates und Statusfenster
+Was: Kostenlose Erweiterungs-Updates zum Anklicken, mit Sicherung vorher und Versionskontrolle nachher; ein Statusfenster zeigt jeden Befehl und die Antwort.
+Warum: Veraltete Erweiterungen sind das häufigste Einfallstor.
+Wie: Joomla-Befehl extension:install mit der Download-Adresse aus dem Update-Verzeichnis; nur gegen Testumgebungen geprüft.
+### Temp-Ordner, JCE-Profile, Schadcode-Dateien
+Was: Aktionen zum Leeren von tmp, Löschen schädlicher JCE-Profile und Entfernen gemeldeter Webshell-Dateien.
+Warum: Das sind die häufigsten Reste nach einem Hack.
+Wie: Immer nach Sicherung und Bestätigung; Code in normalen Dateien bleibt Handarbeit.
+
+## 1.3 | | Protokolle sichern
+### Protokolle auf den PC sichern
+Was: Zugriffs- und Fehlerprotokolle werden auf deinen PC kopiert.
+Warum: Viele Hoster löschen alte Protokolle; danach lässt sich ein Einbruch nicht mehr nachvollziehen.
+Wie: Erst suchen, dann bestätigen, dann sichern; Größe und SHA-256 werden geprüft; Wiederholung kopiert nur Neues.
+
+## 1.2 | | Übergabe an Claude, Online-Listen, erste Lösungen
+### An Claude übergeben und Online-Abgleich
+Was: Ein Knopf bereitet die Berichte vor; die aktuelle Liste verwundbarer Erweiterungen wird online verglichen.
+Warum: Auswertung und Abgleich sollen einfacher sein.
+Wie: Das Programm lädt nichts hoch und kennt dein Claude-Konto nicht.
+### Lösungen auf Knopfdruck
+Was: Feste Aktionen: Schreibrechte, Cache leeren, Joomla aktualisieren.
+Warum: Wiederkehrende Handgriffe sollen sicher und nachvollziehbar sein.
+Wie: Vorschau, Bestätigung, Sicherung, Abbruch ohne gültige Sicherung.
+
+## 1.1 | | Weniger Fehlalarme
+### Fehlalarme reduziert
+Was: Bilder, Cache-Dateien, leere index.php, übliche Dateinamen, Schutzregeln und Update-Wellen lösen keinen Alarm mehr aus; Angriffsversuche zählen nur bei Antwort 2xx als kritisch.
+Warum: Der erste echte Lauf zeigte zu viele harmlose Treffer.
+Wie: Feinere Regeln und Ausnahmen; abgewehrte Versuche erscheinen als Hinweis.
+### Verbindungstest mit Countdown
+Was: Zeitgrenze pro Schritt, Abbrechen-Knopf.
+Warum: Hängende Verbindungen sollen nicht blockieren.
+Wie: Countdown bis 45 Sekunden.
+
+## 1.0 | | Erste Fassung
+### Prüfungen, Oberfläche, Bericht
+Was: SSH-Verbindung, Prüfkatalog für Joomla (Webshells, Dateien, Rechte, Erweiterungen, Protokolle, Datenbank), Oberfläche im Browser, Bericht und ZIP-Export, Startdatei für Windows.
+Warum: Nach einem Hack sollten Spuren schnell und ohne Server-Änderung gefunden werden.
+Wie: Alle Prüfungen nur lesend; Ergebnis mit Farben und Empfehlung.

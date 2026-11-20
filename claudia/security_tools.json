@@ -1,0 +1,264 @@
+{
+ "stand": "2026-11-02",
+ "quelle_joomla": "https://extensions.joomla.org/category/site-security/",
+ "hinweis_joomla": "Bewertungen laut Joomla Extensions Directory (JED), Listenansicht der Kategorie 'Site Security'. Die JED zeigt Sterne nur gerundet (alle hier: 5 von 5); die Zahl der Bewertungen sagt mehr über die Verbreitung. Die Zahlen ändern sich laufend und können auf den Einzelseiten abweichen.",
+ "joomla": [
+  {
+   "id": "rsfirewall",
+   "name": "RSFirewall!",
+   "developer": "RSJoomla!",
+   "price": "kostenpflichtig",
+   "stars": 5,
+   "reviews": 110,
+   "added_by_request": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/rsfirewall/",
+   "paths": [
+    "com_rsfirewall",
+    "rsfirewall"
+   ],
+   "text": "Firewall mit Systemprüfung, Suche nach veränderten und verdächtigen Dateien, Schutz vor Brute-Force-Anmeldungen und Hinweisen auf unsichere Einstellungen. Kostenpflichtig, dafür fester Hersteller-Support."
+  },
+  {
+   "id": "securitycheckpro",
+   "name": "Securitycheck Pro",
+   "developer": "Texpaok",
+   "price": "kostenpflichtig",
+   "stars": 5,
+   "reviews": 84,
+   "added_by_request": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/securitycheck-pro/",
+   "paths": [
+    "com_securitycheckpro",
+    "securitycheckpro"
+   ],
+   "text": "Web-Firewall, Abgleich installierter Erweiterungen mit bekannten Sicherheitslücken, Prüfung der Dateiintegrität und Schadcode-Suche, Schutz der Anmeldung."
+  },
+  {
+   "id": "securitycheck",
+   "name": "Securitycheck",
+   "developer": "Texpaok",
+   "price": "kostenlos",
+   "stars": 5,
+   "reviews": 38,
+   "added_by_request": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/securitycheck/",
+   "paths": [
+    "com_securitycheck",
+    "securitycheck"
+   ],
+   "text": "Kostenlose Basisversion derselben Entwickler, unter anderem mit Anzeige verwundbarer Erweiterungen. Die Pro-Version bietet deutlich mehr; Einzelheiten stehen auf der JED-Seite.",
+   "install": {
+    "manifest": "https://securitycheck.protegetuordenador.com/update/updates_securitycheck.xml",
+    "element": "pkg_securitycheck",
+    "quelle": "Update-Server laut Manifest-Datei des Pakets (vom Nutzer geliefert, 2026-11-14)"
+   }
+  },
+  {
+   "id": "htprotect",
+   "name": "HTProtect - Security, Firewall & Auto-Updates",
+   "developer": "Pascal Lohmann",
+   "price": "kostenlos",
+   "stars": 5,
+   "reviews": 15,
+   "added_by_request": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/htprotect-security-firewall-auto-updates/",
+   "paths": [
+    "com_htprotect",
+    "htprotect"
+   ],
+   "text": "Kostenlose Erweiterung (GPL) mit Firewall und automatischen Updates. Jung (seit Juli 2026 im Verzeichnis) und deshalb noch wenig bewertet, die Erfahrung im Dauerbetrieb fehlt.",
+   "install": {
+    "manifest": "https://update.wb-dev.de/htprotect.xml",
+    "element": "com_htprotect",
+    "quelle": "Update-Server laut Manifest-Datei des Pakets (vom Nutzer geliefert, 2026-11-14)"
+   }
+  },
+  {
+   "id": "admintools",
+   "name": "Admin Tools / Admin Tools Professional",
+   "developer": "Akeeba Ltd",
+   "price": "kostenlos und kostenpflichtig (Pro)",
+   "stars": 5,
+   "reviews": 364,
+   "reviews_note": "203 (Core) + 161 (Professional)",
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/admin-tools/",
+   "paths": [
+    "com_admintools",
+    "admintools"
+   ],
+   "text": "Seit Jahren verbreitet (Hersteller von Akeeba Backup): erzeugt eine gehärtete .htaccess, sperrt Angriffe, prüft Dateien auf Änderungen und schützt die Anmeldung. Die Web-Firewall (PHP Guard) gehört zur Pro-Version.",
+   "install": {
+    "manifest": "https://cdn.akeeba.com/updates/pkgadmintoolscore.xml",
+    "element": "pkg_admintools",
+    "quelle": "Update-Server laut Manifest-Datei des Pakets (vom Nutzer geliefert, 2026-11-14)"
+   }
+  },
+  {
+   "id": "adminexile",
+   "name": "AdminExile",
+   "developer": "",
+   "price": "",
+   "stars": 5,
+   "reviews": 148,
+   "background": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/adminexile/",
+   "paths": [
+    "adminexile"
+   ],
+   "text": "Versteckt die Anmeldeseite des Backends hinter einem geheimen Schlüssel."
+  },
+  {
+   "id": "bfstop",
+   "name": "Brute Force Stop",
+   "developer": "",
+   "price": "",
+   "stars": 5,
+   "reviews": 42,
+   "background": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/brute-force-stop/",
+   "paths": [
+    "com_bfstop",
+    "bfstop"
+   ],
+   "text": "Sperrt Adressen nach wiederholten fehlgeschlagenen Anmeldungen."
+  },
+  {
+   "id": "jsecure",
+   "name": "jSecure",
+   "developer": "",
+   "price": "",
+   "stars": 0,
+   "reviews": 0,
+   "background": true,
+   "jed": "https://extensions.joomla.org/extension/jsecure/",
+   "paths": [
+    "jsecure"
+   ],
+   "text": "Versteckt die Backend-Anmeldung."
+  },
+  {
+   "id": "ochsimplefirewall",
+   "name": "ochSimpleFirewall",
+   "developer": "",
+   "price": "",
+   "stars": 5,
+   "reviews": 6,
+   "background": true,
+   "jed": "https://extensions.joomla.org/extension/access-a-security/site-security/ochsimplefirewall/",
+   "paths": [
+    "ochsimplefirewall"
+   ],
+   "text": "Einfache Firewall."
+  }
+ ],
+ "wordpress": [
+  {
+   "id": "wordfence",
+   "name": "Wordfence Security",
+   "slug": "wordfence",
+   "paths": [
+    "wordfence"
+   ],
+   "text": "Web-Firewall, Malware-Scanner (vergleicht Dateien mit dem Original), Anmeldeschutz und Echtzeit-Hinweise. Kostenlos, mit einer Bezahlversion für schnellere Regel-Updates."
+  },
+  {
+   "id": "sucuri",
+   "name": "Sucuri Security",
+   "slug": "sucuri-scanner",
+   "paths": [
+    "sucuri-scanner"
+   ],
+   "text": "Dateiintegrität, Protokolle, Härtung und Hinweise bei Änderungen. Die Cloud-Firewall ist ein Bezahldienst des Herstellers."
+  },
+  {
+   "id": "solid",
+   "name": "Solid Security (früher iThemes Security)",
+   "slug": "better-wp-security",
+   "paths": [
+    "better-wp-security",
+    "ithemes-security-pro",
+    "solid-security-pro"
+   ],
+   "text": "Härtung der Einstellungen, Schutz der Anmeldung, Zwei-Faktor-Anmeldung und Dateiänderungs-Erkennung."
+  },
+  {
+   "id": "aios",
+   "name": "All-In-One Security (AIOS)",
+   "slug": "all-in-one-wp-security-and-firewall",
+   "paths": [
+    "all-in-one-wp-security-and-firewall"
+   ],
+   "text": "Einfache Firewall und Anmeldeschutz mit vielen Einstellungen, geeignet für Einsteiger."
+  },
+  {
+   "id": "cerber",
+   "name": "WP Cerber Security",
+   "slug": "wp-cerber",
+   "paths": [
+    "wp-cerber"
+   ],
+   "background": true,
+   "text": "Anmeldeschutz und Spam-Schutz."
+  },
+  {
+   "id": "ninjafirewall",
+   "name": "NinjaFirewall",
+   "slug": "ninjafirewall",
+   "paths": [
+    "ninjafirewall"
+   ],
+   "background": true,
+   "text": "Web-Firewall, die vor WordPress läuft."
+  },
+  {
+   "id": "shield",
+   "name": "Shield Security",
+   "slug": "wp-simple-firewall",
+   "paths": [
+    "wp-simple-firewall"
+   ],
+   "background": true,
+   "text": "Firewall, Scanner und Anmeldeschutz."
+  },
+  {
+   "id": "defender",
+   "name": "Defender Security",
+   "slug": "defender-security",
+   "paths": [
+    "defender-security"
+   ],
+   "background": true,
+   "text": "Scanner, Firewall und Härtung."
+  },
+  {
+   "id": "malcare",
+   "name": "MalCare Security",
+   "slug": "malcare-security",
+   "paths": [
+    "malcare-security"
+   ],
+   "background": true,
+   "text": "Cloud-Scanner und Firewall."
+  },
+  {
+   "id": "patchstack",
+   "name": "Patchstack",
+   "slug": "patchstack",
+   "paths": [
+    "patchstack"
+   ],
+   "background": true,
+   "text": "Meldet bekannte Schwachstellen und schützt vorübergehend per virtuellem Patch."
+  },
+  {
+   "id": "bulletproof",
+   "name": "BulletProof Security",
+   "slug": "bulletproof-security",
+   "paths": [
+    "bulletproof-security"
+   ],
+   "background": true,
+   "text": "Schreibt eigene Schutzregeln in die .htaccess, mit Anmeldeschutz und Firewall."
+  }
+ ]
+}

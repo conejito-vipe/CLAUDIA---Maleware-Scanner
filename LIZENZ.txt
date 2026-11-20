@@ -1,0 +1,86 @@
+CLAUDIA - Lizenz (Freeware, nicht Open Source) / License (freeware, not open source)
+
+Copyright (c) 2026 conejito-vipe. Alle Rechte vorbehalten. / All rights reserved.
+Kontakt / Contact: https://github.com/conejito-vipe
+
+=====================================================================
+DEUTSCH (verbindliche Fassung)
+=====================================================================
+
+1. Gegenstand
+Diese Lizenz gilt für das Programm CLAUDIA mit Quelltext, Dokumentation und Beigaben ("Software"). Der Quelltext ist zum Lesen und Prüfen einsehbar. Die Software ist trotzdem keine Open-Source-Software. Sie wird öffentlich zugänglich gemacht, um sie zu testen und weiterzuentwickeln. Der Urheber kann künftig Versionen, Erweiterungen oder kommerzielle Lizenzen kostenpflichtig anbieten. CLAUDIA wurde mit Claude (einer KI von Anthropic) im Auftrag des Urhebers erstellt.
+
+2. Erlaubte kostenlose Nutzung
+Du darfst die Software kostenlos nutzen und testen, wenn du
+ a) eine Privatperson bist und sie nicht kommerziell für eigene Seiten verwendest, oder
+ b) eine gemeinnützige Organisation oder ein Verein bist und sie für deine gemeinnützigen Zwecke auf eigenen Seiten einsetzt.
+Du darfst den Quelltext lesen und prüfen. Weitere Rechte räumt diese Lizenz nicht ein.
+
+3. Nicht erlaubt ohne vorherige ausdrückliche Zustimmung des Urhebers
+ a) Kommerzielle Nutzung. Das ist jede Nutzung im Zusammenhang mit einer gewerblichen oder beruflichen Tätigkeit oder zur Erzielung von Einnahmen, insbesondere durch Unternehmen, Selbständige und Agenturen, die Prüfung von Seiten im Auftrag Dritter sowie Verkauf, Vermietung oder das Anbieten der Software oder ihrer Ergebnisse als Dienstleistung. Alle Nutzer außer den in Abschnitt 2 genannten (zum Beispiel Unternehmen, Selbständige, Behörden) benötigen vorab eine ausdrückliche Freigabe oder Lizenz, auch zum Testen. Die Anfrage geht über das GitHub-Profil des Urhebers (https://github.com/conejito-vipe).
+ b) Veränderung. Die Software darf nicht verändert, angepasst, übersetzt, in andere Programme eingebaut oder zu abgeleiteten Werken verarbeitet werden. Ausgenommen sind Änderungen, die ausschließlich dazu dienen, dem Urheber einen Verbesserungsvorschlag (Issue oder Pull Request) zu übermitteln; mit der Übermittlung räumst du dem Urheber ein einfaches, unbefristetes Recht ein, den Vorschlag unentgeltlich zu nutzen und in die Software aufzunehmen.
+ c) Weitergabe und Verbreitung. Die Software darf Dritten nicht weitergegeben, nicht veröffentlicht, nicht zum Download angeboten und nicht gespiegelt werden, auch nicht unverändert. Bezogen wird sie nur vom Urheber. Notwendige Kopien zur eigenen Nutzung und zur Datensicherung sind erlaubt.
+Zwingende gesetzliche Rechte (zum Beispiel nach den Paragrafen 69d und 69e des Urheberrechtsgesetzes) bleiben unberührt. Das Ansehen und Forken eines öffentlichen Repositories innerhalb von GitHub, soweit die Nutzungsbedingungen von GitHub es erlauben, bleibt ebenfalls unberührt, gibt aber keine weiteren Rechte nach diesem Abschnitt.
+
+4. Ausschlüsse (Parteien und extrem rechte Organisationen)
+ - Politische Parteien sowie deren Gliederungen, Organisationen oder Wahlkampagnen sind von der Nutzung dieser Software ausgeschlossen.
+ - Von jeglicher Nutzung ausdrücklich ausgeschlossen sind außerdem Parteien, Vereinigungen, Gruppen und Vereine (sowie Personen oder Organisationen, die in deren Auftrag oder Namen handeln), die
+   a) vom Bundesamt für Verfassungsschutz oder einem Landesamt für Verfassungsschutz als rechtsextremistische Bestrebung eingestuft sind (als gesichert rechtsextremistisch oder als Verdachtsfall), oder
+   b) verboten sind oder deren Verfassungswidrigkeit durch das Bundesverfassungsgericht festgestellt wurde.
+   Maßgeblich ist der Stand zum Zeitpunkt der Nutzung. Entfällt die Einstufung oder das Verbot, entfällt auch der Ausschluss.
+
+5. Verantwortung beim Einsatz
+Setze die Software nur für Seiten und Server ein, die dir gehören oder für die du ausdrücklich berechtigt bist. Die Prüfungen sind nur lesend. Die "Lösungen auf Knopfdruck" verändern Dateien auf dem Server; nutze sie nur mit eigener Sicherung und nur, wenn du die Warnung verstanden hast.
+
+6. Keine Gewährleistung, Haftung
+Die Software wird so bereitgestellt, wie sie ist, ohne jegliche Gewährleistung oder Erfolgsgarantie. Sie sucht nach bekannten Spuren und kann Dinge übersehen oder harmlose Dinge melden. Die Nutzung geschieht auf eigene Verantwortung. Die Haftung des Urhebers ist auf Vorsatz und grobe Fahrlässigkeit beschränkt. Unberührt bleibt die Haftung für die Verletzung von Leben, Körper und Gesundheit, nach dem Produkthaftungsgesetz und soweit das Gesetz sie zwingend vorschreibt.
+
+7. Beendigung
+Bei einem Verstoß gegen diese Lizenz erlischt dein Nutzungsrecht automatisch. Du musst die Software dann löschen.
+
+8. Fremdkomponenten
+Fremdkomponenten haben eigene Lizenzen, die für sie gelten und nicht durch diese Lizenz ersetzt werden: paramiko (SSH-Bibliothek, LGPL; wird beim ersten Start aus dem offiziellen Python-Paketverzeichnis installiert) und die Länderflaggen (Twemoji, siehe claudia/web/TwemojiCountryFlags.LICENSE.md).
+
+9. Schlussbestimmungen
+Es gilt deutsches Recht, soweit zwingende Verbraucherschutzvorschriften nichts anderes bestimmen. Ist eine Bestimmung unwirksam, bleiben die übrigen wirksam. Bei Abweichungen zwischen den Fassungen gilt die deutsche.
+
+=====================================================================
+ENGLISH (translation; the German version is binding)
+=====================================================================
+
+1. Subject matter
+This license applies to the program CLAUDIA including source code, documentation and extras (the "Software"). The source code can be read and inspected. The Software is nevertheless not open-source software. It is made publicly available for testing and further development. The author may offer future versions, extensions or commercial licenses for a fee. CLAUDIA was created with Claude (an AI by Anthropic) on behalf of the author.
+
+2. Permitted free use
+You may use and test the Software free of charge if you are
+ a) an individual and use it non-commercially on your own sites, or
+ b) a non-profit organization or association and use it for your non-profit purposes on your own sites.
+You may read and inspect the source code. This license grants no further rights.
+
+3. Not permitted without the author's prior explicit consent
+ a) Commercial use. This means any use in connection with a business or professional activity or to generate income, in particular by companies, self-employed people and agencies, checking sites on behalf of third parties, and selling, renting or offering the Software or its results as a service. All users other than those named in Section 2 (for example companies, self-employed people, public authorities) need an explicit permission or license in advance, including for testing. Requests go through the author's GitHub profile (https://github.com/conejito-vipe).
+ b) Modification. The Software must not be modified, adapted, translated, built into other programs or turned into derivative works. Exempt are changes made solely to send the author a suggested improvement (issue or pull request); by submitting it you grant the author a non-exclusive, perpetual right to use the suggestion free of charge and to include it in the Software.
+ c) Redistribution. The Software must not be passed on to third parties, published, offered for download or mirrored, not even unchanged. It is obtained only from the author. Copies necessary for your own use and for backup are allowed.
+Mandatory statutory rights (for example under sections 69d and 69e of the German Copyright Act) remain unaffected. Viewing and forking a public repository within GitHub, as far as GitHub's terms of service allow it, also remains unaffected but grants no further rights under this section.
+
+4. Exclusions (political parties and far-right organizations)
+ - Political parties, including their branches, organizations or election campaigns, are excluded from using this Software.
+ - Also explicitly excluded from any use are parties, associations, groups and clubs (as well as individuals or organizations acting on their behalf or in their name) that
+   a) are classified as a right-wing extremist effort by the Federal Office for the Protection of the Constitution (Bundesamt für Verfassungsschutz) or a state office for the protection of the constitution (either as confirmed right-wing extremist or as a suspected case), or
+   b) are banned or whose unconstitutionality has been established by the Federal Constitutional Court.
+   What counts is the status at the time of use. If the classification or the ban ends, the exclusion ends as well.
+
+5. Responsibility when using it
+Use the Software only on sites and servers that you own or are explicitly authorized to use it on. The checks are read-only. The "one-click fixes" change files on the server; use them only with your own backup and only after you have understood the warning.
+
+6. No warranty, liability
+The Software is provided "as is", without any warranty or guarantee of success. It searches for known traces and may miss things or report harmless ones. Use is at your own risk. The author's liability is limited to intent and gross negligence. Liability for injury to life, body or health, under the Product Liability Act and as mandatorily required by law remains unaffected.
+
+7. Termination
+Your right to use the Software ends automatically if you violate this license. You must then delete the Software.
+
+8. Third-party components
+Third-party components have their own licenses, which apply to them and are not replaced by this license: paramiko (SSH library, LGPL; installed from the official Python package index on first start) and the country flags (Twemoji, see claudia/web/TwemojiCountryFlags.LICENSE.md).
+
+9. Final provisions
+German law applies, unless mandatory consumer protection rules provide otherwise. If a provision is invalid, the others remain valid. If the versions differ, the German one prevails.

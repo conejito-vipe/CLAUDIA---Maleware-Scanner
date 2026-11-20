@@ -1,0 +1,27 @@
+{
+  "stand": "2026-11-10",
+  "hinweis": "Positivliste gegen Fehlalarme (D4). Eine Datei gilt nur dann als 'Muster in einer bekannten Sicherheits-/Backup-Erweiterung', wenn ihr Pfad im Ordner der Erweiterung liegt (path) UND ihr Inhalt die Kennung der Erweiterung enthält (content). Nur eines von beiden reicht nie.",
+  "tools": [
+    {"id": "akeeba", "name": "Akeeba Backup / Admin Tools",
+     "path": "^\\./(administrator/components/com_(akeeba|akeebabackup|admintools)/|components/com_(akeeba|akeebabackup|admintools)/|plugins/[^/]+/(akeeba[a-z]*|admintools|actionlog_akeebabackup|system_admintools)/|wp-content/plugins/(akeebabackupwp|admintools-wp|akeebabackupcore)/)",
+     "content": "Akeeba|Nicholas K\\. Dionysopoulos|AdminTools"},
+    {"id": "wordfence", "name": "Wordfence",
+     "path": "^\\./(wp-content/plugins/wordfence/|wordfence-waf\\.php$|wp-content/wflogs/)",
+     "content": "Wordfence|wfWAF|wfScan|WFWAF"},
+    {"id": "sucuri", "name": "Sucuri Security",
+     "path": "^\\./wp-content/plugins/sucuri-scanner/",
+     "content": "Sucuri|SUCURI"},
+    {"id": "securitycheck", "name": "Securitycheck (Pro)",
+     "path": "^\\./(administrator/components/com_securitycheck(pro)?/|plugins/system/securitycheck(pro)?/|plugins/[^/]+/securitycheck[a-z]*/)",
+     "content": "Securitycheck|SecuritycheckPro"},
+    {"id": "rsfirewall", "name": "RSFirewall!",
+     "path": "^\\./(administrator/components/com_rsfirewall/|plugins/system/rsfirewall/|plugins/[^/]+/rsfirewall[a-z]*/)",
+     "content": "RSFirewall|RSJoomla"},
+    {"id": "malcare", "name": "MalCare Security",
+     "path": "^\\./wp-content/plugins/malcare-security/",
+     "content": "MalCare|BlogVault|malcare"},
+    {"id": "imunify", "name": "Imunify Security",
+     "path": "^\\./wp-content/plugins/imunify-security/",
+     "content": "Imunify|CloudLinux"}
+  ]
+}

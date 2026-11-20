@@ -1,0 +1,142 @@
+## start | Schnellstart
+CLAUDIA prüft eine Joomla- oder WordPress-Seite über eine verschlüsselte SSH-Verbindung auf Spuren eines Hacks und auf typische Schwachstellen. Alle Prüfungen sind nur lesend. Änderungen am Server gibt es nur über die Knöpfe unter "Lösungen auf Knopfdruck", mit Vorschau, ausdrücklicher Bestätigung und vorheriger Sicherung.
+- start.bat doppelklicken (die einzige Startdatei). Ein kleines Startfenster zeigt nur beim Start, wie sich das Programm einrichtet (beim ersten Mal ein bis zwei Minuten). Sobald das Programmfenster da ist, schließt sich das Startfenster: Danach ist genau ein Fenster offen, und das Programm endet, wenn du es schließt.
+- Mac (ab 2.9.0): start.command doppelklicken (beim ersten Mal Rechtsklick > Öffnen; sonst im Terminal: bash start.command). Fehlt Python, lädt start.command es von python.org, prüft die digitale Signatur und installiert es; dafür fragt macOS nach deinem Mac-Passwort. Das Programmfenster hat auf dem Mac den normalen Fensterrahmen. Programmdaten liegen unter ~/Library/Application Support/CLAUDIA, Berichte unter ~/Documents/CLAUDIA/Berichte. Grenze: Die Mac-Fassung ist noch nicht auf einem echten Mac getestet.
+- Zugangsdaten des Hosters eintragen (Server, Benutzer, Passwort oder Schlüsseldatei, Ordner der Seite) und "Verbindung testen".
+- Prüfungen wählen: Schnellcheck, Nach einem Hack oder Komplett.
+- "Prüfung starten", danach Ergebnis lesen, Bericht speichern oder an Claude übergeben.
+Das Programm läuft nur auf deinem PC (Adresse 127.0.0.1) und nur in seinem eigenen Fenster, geschützt durch einen Einmal-Startschlüssel. Passwörter bleiben im Arbeitsspeicher und werden nie gespeichert oder in Berichte geschrieben.
+
+## connect | 1. Verbindung
+Du brauchst einen SSH-Zugang zum Webspace; bei vielen Hostern muss er im Kundenmenü erst aktiviert werden.
+- Server, Port (meist 22), Benutzername und Passwort oder Schlüsseldatei eintragen. Der Ordner der Seite wird relativ zum Login-Ordner angegeben (z. B. "html").
+- Beim ersten Mal zeigt das Programm den Fingerabdruck des Servers. Vergleiche ihn mit der Angabe deines Hosters und bestätige ihn. Ändert er sich später, warnt das Programm.
+- Optional: Google-Safe-Browsing-Schlüssel. Damit wird abgefragt, ob die Seite auf Googles Sperrliste steht (nur die Adresse geht an Google). Der Schlüssel bleibt im Arbeitsspeicher, wird nie gespeichert und nie in Berichte geschrieben.
+- Kann ein sehr alter Server nur veraltete SSH-Verfahren, fragt das Programm vorher ausdrücklich nach und verbindet nur mit deiner Bestätigung.
+- Der Verbindungstest zeigt CMS (Joomla oder WordPress), Version, PHP und das Datenbank-Programm. Die PHP-Version erkennt das Programm selbst und rät nichts: aus der Antwort der Webseite, aus .htaccess, aus den PHP-Prozessen deines Kontos.
+- Die Verbindung ist immer verschlüsselt (SSH/SFTP). Eine unverschlüsselte Verbindung gibt es nicht; die Art der Verschlüsselung steht oben in der Verbindungsanzeige.
+- Profile (ohne Passwort) lassen sich speichern.
+
+## tests | 2. Prüfungen auswählen
+- Schnellcheck: die wichtigsten Prüfungen, wenige Minuten.
+- Nach einem Hack: alles Wichtige inklusive Datenbank und Zugriffsprotokoll.
+- Komplett: alle Prüfungen, auch die langsamen und die Datenbank-Prüfungen.
+Zusammengehörige Prüfungen stehen in einem Cluster mit einer Klammer am Rand. "Details" erklärt bei jeder Prüfung, was passiert, warum es wichtig ist und was gelesen wird. Prüfungen mit "dauert länger" belasten den Server kurz, laufen aber mit niedriger Priorität.
+Der Bereich "Datenbank (optional, eigene Verbindung)" nutzt die Zugangsdaten aus der Konfigurationsdatei der Seite oder eigene Zugangsdaten (z. B. ein Benutzer mit Leserechten). Das Datenbank-Passwort bleibt im Arbeitsspeicher.
+Oben auf der Seite gibt es "Protokolle auf deinen PC sichern": Zugriffs- und Fehlerprotokolle des Hosters werden kopiert (nur lesen, Größe und SHA-256 werden geprüft), weil viele Hoster alte Protokolle automatisch löschen. Die Protokolle bleiben auf deinem PC und kommen nicht in die ZIP für Claude.
+
+## run | 3. Prüfung und Ergebnis
+Jedes Feld im Streifen steht für eine Prüfung und färbt sich, wenn das Ergebnis da ist. "Abbrechen" stoppt sauber; fertige Ergebnisse bleiben erhalten.
+- Grün = in Ordnung, Blau = Hinweis, Gelb = bitte prüfen, Rot = kritisch, Grau = übersprungen oder fehlgeschlagen.
+- Oben steht die Gesamtbewertung, darunter die Karte "Updates", dann die Befunde mit Erklärung und Empfehlung. Filter nach Schweregrad sind über die Zähler erreichbar.
+- Wichtig: Das Programm sucht nach bekannten Spuren. "Keine Auffälligkeiten" heißt nicht, dass eine Seite nachweislich sauber ist. Gelb und Rot sind Anlässe zum Nachsehen, keine Beweise.
+- Neben den Texten zeigt ein Radar jede Prüfung als Punkt: Er leuchtet auf, sobald das Ergebnis da ist (kritisch kräftig in Bernstein, in Ordnung gedämpft), die laufende Prüfung ist hervorgehoben. Bei "Animationen reduzieren" in Windows bleibt das Bild ruhig. Das Radar ändert keine Ergebnisse.
+- Während des Laufs ist das Umschalten der Sprache gesperrt.
+
+## report | 4. Berichte und Weitergabe
+- "ZIP herunterladen": bericht.txt, ergebnisse.json, Rohdaten und LIES_MICH.txt, ohne Passwörter.
+- "Alle Berichte als Dateien speichern": Ordner Dokumente\Claudia\Berichte\<server>_<datum> mit zusätzlich bericht.html (druckbar, mit Symbolen) und fuer_claude.zip.
+- "An Claude übergeben": speichert die Berichte, öffnet den Ordner und Claude im Browser und legt einen fertigen Text in die Zwischenablage. Das Programm lädt selbst nichts hoch.
+- Zugangsdaten aus der Konfigurationsdatei sind unkenntlich gemacht, IP-Adressen werden auf Wunsch gekürzt. Berichte enthalten trotzdem Dateinamen und Pfade deiner Seite: nur an Personen weitergeben, denen du das auch erzählen würdest.
+- Der Bericht wird in der gerade gewählten Sprache erzeugt.
+
+## fixes | 5. Lösungen auf Knopfdruck
+Feste, vorab festgelegte Aktionen. Jede zeigt zuerst die Befehle (rotes Codefenster mit Kopieren-Knopf) und läuft erst nach deiner Bestätigung. Ein Statusfenster zeigt live jeden Befehl und die Antwort des Servers; Passwörter sind geschwärzt.
+- Empfohlene Reihenfolge: 1. Sicherung, 2. JCE-Profile, 3. Hintertüren und PHP in images (in Quarantäne), 4. Temp-Ordner, 5. Code in Dateien von Hand, 6. Passwörter erneuern, 7. Cache, 8. Prüfung wiederholen, zuletzt alte Sicherungen löschen. Es erscheinen nur Schritte, die für deine Seite nötig sind.
+- Sicherheits-Erweiterung installieren: Findet das Programm keine Firewall oder keinen Scanner auf dem Server, zeigt es Karten mit Bild, Kurzbeschreibung und Link zur Store-Seite (wordpress.org bzw. Joomla Extensions Directory). Du wählst eine aus; vorher gibt es Vorschau, Sicherung und Bestätigung. WordPress: Installation und Einschalten über WP-CLI, danach Prüfung gegen die Prüfsummen von wordpress.org. Joomla: nur kostenlose Erweiterungen mit öffentlicher Update-Adresse; kostenpflichtige und alle anderen bekommst du nur über den Link. Ohne Internet erscheinen die eigenen Kurztexte statt Bild und Store-Text.
+- Sicherungen liegen auf dem Server unter ~/claudia-sicherung-<datum>; die Aktion bricht ohne gültige Sicherung ab.
+- Sicherheits-Erweiterungen bei Joomla (neu): Direkt installierbar sind die kostenlosen Securitycheck, HTProtect und Admin Tools Core. Das Programm holt die neueste Version vom Update-Server, den das Paket selbst in seiner Manifest-Datei nennt (nur https). Alle anderen Joomla-Erweiterungen der Liste sind bezahlt oder nur als Link zur Store-Seite aufgeführt. Gegen die echten Update-Server wurde das nicht getestet, nur mit nachgebildeten Antworten.
+- Sicherungs-Tool installieren (seit 2.2): Findet das Programm keine Sicherungs-Erweiterung, zeigt es dieselben Karten und dieselbe Vorschau wie bei den Sicherheits-Erweiterungen (Akeeba Backup, UpdraftPlus u. a.). WordPress: Installation per WP-CLI mit Einschalten und Prüfsummenkontrolle. Joomla: Akeeba hat keine hinterlegte, geprüfte Update-Adresse, deshalb gibt es nur Link und Anleitung. Die Einrichtung (Zeitplan, Speicherort) machst du danach im Backend.
+- Sicherungen (seit 2.2): Zu jeder Aktion steht in der Vorschau, was gesichert wird (voll, gezielt, nur Protokoll oder keine). Liegt der Sicherungsordner im öffentlichen Bereich, schützt das Programm ihn mit Zufallsnamen, .htaccess und index.html und warnt; jede Sicherung enthält eine MANIFEST.txt (Inhalt, Zeitpunkt, Befund, Rückspielen).
+- Joomla-API abschalten (neu): "Joomla-API (Web-Services) abschalten" erscheint, wenn die Prüfung "API-Zugang" eine aktive Schnittstelle meldet. Sie schaltet die API-Plugins aus (Tabelle extensions, vorher gesichert, rueckgaengig.sql im Sicherungsordner). Tokens und Dateien bleiben. Nutzt du die API (Apps, Anbindungen), lass die Aktion aus.
+- Konten und Erweiterungen (seit 2.3): "Verdächtige Benutzerkonten sperren", "API-Tokens und Anwendungs-Passwörter widerrufen", "Alle angemeldeten Sitzungen beenden" und "Verwundbare Erweiterung ausschalten" arbeiten mit einer Auswahl: Nur angehakte Einträge werden angefasst. Der letzte aktive Administrator und geschützte Erweiterungen (Kern, Anmeldung, Sicherheit, Sicherung) sind ausgenommen. Vorher Sicherung der Tabelle; bei Sperren und Ausschalten liegt eine Rückgängig-Datei (rueckgaengig.sql bzw. .txt) im Sicherungsordner.
+- Joomla-Geheimnis wird nicht erneuert: Bei einem Einbruch beendet CLAUDIA die Sitzungen ("Alle angemeldeten Sitzungen beenden"), ändert aber nicht das Geheimnis (secret) in der configuration.php. Ein neues Geheimnis würde Zwei-Faktor-Anmeldung, Passkeys und API-Token unbrauchbar machen, und es gibt keinen sicheren Weg zurück außer der alten Datei. Die Begründung steht in der Tech Doku bei der Aktion "Alle angemeldeten Sitzungen beenden".
+- Fundstellen (seit 2.3): Bei Schadcode-Mustern, Datenbank-Treffern und unbekannten Dateien in Kernordnern zeigt das Ergebnis Datei, Zeile und den Code der Umgebung in einem schwarzen Code-Fenster, die Treffer-Stelle rot markiert. Der Code wird nur gelesen, nie ausgeführt. Dateien, die nur Text oder Konfiguration enthalten, stehen getrennt als Hinweis.
+- Herkunft der Absender (seit 2.3): Vor den IPs bei "Häufigste Absender" steht die Flagge des Landes, in dem das Netz registriert ist (offizielle RDAP-Auskunft der Regional-Registries, nur das gekürzte Netz wird abgefragt). Das ist das Registrierungsland, nicht der genaue Standort.
+- Logos, Preise, Bewertungen (seit 2.3): Im Verbindungsfenster zeigt das Programm das offizielle Logo von Joomla bzw. WordPress (zur Laufzeit von den offiziellen Servern geladen). Installierbare Werkzeuge sind als kostenlos bzw. kostenpflichtig gekennzeichnet und, wenn bekannt, mit ihrer Bewertung.
+- Programmfenster (neu): Es öffnet mittig auf dem Bildschirm, lässt sich an den Rändern in der Größe ändern und wird mit dem X oben rechts beendet. Der rote Knopf "Deinstallieren" steht über der Fußzeile und erscheint nur beim Start und im Ergebnis. Hat start.bat Python von python.org installiert, entfernt CLAUDIA es nicht selbst; die Deinstallation nennt dann den Windows-Weg (Einstellungen > Apps).
+- Deinstallieren (seit 2.3): Der Knopf unten rechts öffnet ein eigenes Fenster; du wählst, was entfernt wird (Programm, Einstellungen, Python). Python wird zuletzt mit winget in einer eigenen Konsole entfernt.
+- Kontrolle und Schutz (seit 2.3.1): Nach einer erfolgreichen Aktion wiederholt das Programm die dazugehörigen Prüfungen (nur lesend) und zeigt "Vorher" und "Jetzt". Aktionen, die Dateien ändern, prüfen vorher den Schreibschutz und brechen sonst ohne Änderung ab. "PHP-Ausführung im Bilder-Ordner sperren" legt eine .htaccess an und prüft per Testdatei, ob sie wirkt; sonst wird zurückgerollt. Hintertüren werden nicht gelöscht, sondern einzeln gewählt und in einen Quarantäne-Ordner (~/claudia-quarantaene-<Datum>) verschoben, mit der Liste QUARANTAENE.txt (Ursprungspfad, Rechte, Besitzer, Prüfsumme). Die Aktion "Dateien aus der Quarantäne zurückholen" bringt sie mit Vorschau an ihren Platz zurück und überspringt jede Datei, deren Ursprungsort belegt ist (seit 2.3.2). Mit "Quarantäne-Ordner auf dem Server löschen" entfernst du eine Quarantäne endgültig (seit 2.3.3).
+- Härtung (seit 2.4.1): "Sicherheits-Header setzen", "Ordnerlisten abschalten" und "XML-RPC von WordPress sperren" ergänzen die .htaccess um je einen eigenen, markierten Block (Vorschau, Sicherung als htaccess.vorher, Wirkungstest per Abruf, sonst Rückgängig). Sie wirken nur bei Apache und kompatiblen Servern; bei nginx werden sie nicht angeboten. "HSTS aktivieren" ist eine ROTE Aktion: Browser merken sich die Vorgabe 7 Tage, das lässt sich vom Server aus nicht zurückrufen. Deshalb gibt es einen roten Hinweis und eine zweite Bestätigung; die Laufzeit ist bewusst kurz (7 Tage, ohne Unterdomains, ohne Preload-Liste). "Dateirechte auf Sollwerte setzen" entfernt das Schreibrecht der Gruppe bei den gemeldeten Dateien und Ordnern und setzt die Konfigurationsdatei auf 440; vorher werden die alten Rechte festgehalten, danach wird die Startseite geprüft und bei einem Fehler alles zurückgesetzt.
+- Content-Security-Policy (seit 2.3.1): Die Prüfung "Content-Security-Policy (CSP) prüfen" zeigt vorhandene Regeln mit einer Erklärung je Regel. Ohne CSP erklärt sie den Nutzen und zeigt einen Vorschlag für die .htaccess, der aus der Startseite erzeugt wird (zuerst im Testmodus Report-Only verwenden). Der Vorschlag wird nur angezeigt, das Programm schreibt ihn nicht.
+- .htaccess zurücksetzen und Datenbank-Code entfernen (seit 2.4): "Hauptdatei .htaccess auf den Standard zurücksetzen" zeigt jede Änderung als Vergleich und stellt bei einem Serverfehler der Startseite sofort den alten Stand her. "Eingeschleusten Code in der Datenbank entfernen" nimmt nur die gewählten Einträge und nur Skript- und Frame-Blöcke; der alte Wert steht vorher in rueckgaengig.sql. Beide Aktionen brechen ohne gültige Sicherung ab.
+- Aussehen (seit 2.4): Start-, Programm- und Deinstallationsfenster haben dasselbe Aussehen. Das Startfenster braucht PySide6; beim ersten Start richtet start.bat es in der Konsole ein (etwa 80 MB). Ohne PySide6 erscheint ein einfaches Fenster im gleichen Farbton.
+- Schadcode in normalen Dateien entfernt das Programm nicht selbst. Es zeigt Ausschnitte mit Zeilennummern: rot = weg, grün = bleibt (bei Joomla-Kerndateien mit der Originalzeile), grau = Orientierung. Mache vor dem Bearbeiten eine Kopie.
+- "Alte Sicherungen löschen" löscht nur, was du ankreuzt, und nur Namen aus dem Muster des Programms; auf Wunsch bleibt die neueste stehen. Dasselbe gilt für alte Aktionsprotokolle.
+- Joomla-Kern: "Kerndateien neu einspielen" lädt das offizielle Paket der installierten Version, prüft es und ersetzt nur Kerndateien (Inhalte und Konfiguration bleiben).
+- Änderungen auf eigene Gefahr. Bei Unsicherheit Claude oder einen Spezialisten fragen.
+
+## updates | 6. Updates
+Die Karte "Updates" steht oben auf der Ergebnisseite. Die Suche startet automatisch.
+- Joomla-Update und Erweiterungs-Updates (nur kostenlose mit offiziellem Update). Vorher wird eine vollständige Sicherung angelegt und geprüft; nach jeder Installation wird die Version kontrolliert.
+- Schlägt eine Installation fehl, versucht das Programm sie nach den übrigen Erweiterungen bis zu 3 weitere Male.
+- Erweiterungen, deren Installer nicht per Kommandozeile läuft (z. B. OSMap), werden nicht wiederholt. Das Programm zeigt dann die Download-Adresse und den Weg über das Backend (System -> Aktualisieren). Für OSMap gibt es bei Bedarf einen manuellen Hinweis.
+- Die Prüfung "Lässt sich automatisch aktualisieren?" meldet nur Auffälligkeiten (Rechte, Besitzer, Reste abgebrochener Updates, Speicherplatz, PHP-Module); ist alles in Ordnung, steht dort ein kurzer Haken.
+- Gilt analog für WordPress (Kern, Plugins, Themes über WP-CLI).
+- "Keine Updates" steht nur, wenn die Suche nachweislich funktioniert hat. Das Ergebnis der Joomla-Kommandozeile wird mit der Tabelle #__updates und einer Gegenprobe gegen die Update-Server der Erweiterungen verglichen (einzelne https-Abfragen, nacheinander). Passt etwas nicht zusammen, steht dort "Ergebnis nicht verlässlich" mit den Gründen; dann bitte im Joomla-Backend unter System > Aktualisieren nachsehen.
+
+## wordpress | 7. WordPress
+Erkennt das Programm WordPress, erscheint ein eigener Bereich mit gleichem Aufbau wie bei Joomla. Die Prüfungen sind auf WordPress zugeschnitten: Kern gegen die offiziellen Prüfsummen von api.wordpress.org, Plugins und Themes (Inventar, bekannte Schwachstellen, Pflegestand), Einstiegsdateien und mu-plugins, wp-config.php, Benutzer und Anwendungspasswörter, Einstellungen in der Datenbank, eingeschleuster Code in Beiträgen und Optionen, Fehlerprotokolle und öffentlich erreichbare Dateien.
+WooCommerce: Ist das Plugin installiert, prüft das Programm zusätzlich API-Schlüssel, Webhooks, Zahlungsarten, Shop-Manager und frei abrufbare Shop-Daten (Bestell-Schnittstelle, Protokolle). Alles ist lesend; Schlüssel und Geheimwörter werden nie gelesen oder ausgegeben. Bekannte Empfänger von Webhooks tragen Sie unter den erlaubten Adressen ein.
+Drupal: CLAUDIA erkennt Drupal ab Version 8 und zeigt eigene Prüfungen für Kern, settings.php, abrufbare Dateien, Module und Themes, Administrator-Konten, Einstellungen und Code in Inhalten. Alles ist lesend. Lösungen auf Knopfdruck gibt es für Drupal noch nicht.
+TYPO3: CLAUDIA erkennt TYPO3 ab Version 11 (klassische Installation und Composer-Installation) und zeigt eigene Prüfungen für den Kern (Version, Support-Ende, Sicherheitsmeldungen, Vergleich der Systemerweiterungen mit dem Original-Paket), die Einstellungsdatei (settings.php und additional.php), frei abrufbare Dateien und das Install-Tool, Erweiterungen (Sicherheitsmeldungen, überholte und Entwicklungs-Erweiterungen), Backend-Konten und Code in Inhalten. Alles ist lesend; Zugangsdaten und Schlüssel der Einstellungsdatei werden nie angezeigt oder gespeichert. Lösungen auf Knopfdruck gibt es für TYPO3 noch nicht.
+Grenze: Die Liste bekannter Plugin-Schwachstellen ist eine kleine Auswahl. Aktuelles zeigt die Online-Prüfung.
+
+## newchecks | 8. Weitere Prüfungen (seit 2.0)
+- Joomla-Kern gegen die Original-Prüfsummen: veränderte, zusätzliche und fehlende Kerndateien.
+- PHP-Einstellungen: gefährliche Funktionen, display_errors, expose_php, open_basedir, auto_prepend_file u. a. (gelesen über die PHP-Kommandozeile; die Webseite kann abweichen).
+- Integrität der Konfigurationsdatei: Syntax, Zusatzzeilen, Kopien im Webverzeichnis.
+- Google Safe Browsing: Abfrage der eigenen Adresse mit deinem eigenen kostenlosen API-Schlüssel. Der Schlüssel wird maskiert und nie gespeichert oder exportiert.
+- Bedrohungslage: aktuelle Einträge der Joomla Vulnerable Extensions List und der NVD (CVE) werden vor jedem Lauf eingelesen.
+- Malware-Muster und versteckte Strukturen: bekannte Hintertüren, versteckte Dateien und Ordner, doppelte Endungen, Leerzeichen-Namen.
+- .htaccess-Untersuchung: Handler-Zuweisungen, auto_prepend, Cloaking für Suchmaschinen, Weiterleitungen, Schutzregeln.
+- Sicherheits-Erweiterung vorhanden? Wenn keine, Empfehlungen mit Bewertungen aus dem Joomla Extensions Directory (Stand ist angegeben, Sterne sind gerundet).
+- Konto & Dauerzugänge (seit 2.2): Cronjobs des Server-Kontos, SSH-Schlüssel (authorized_keys, nur Fingerabdrücke), laufende Prozesse, Start-Dateien der Shell (.bashrc, .profile ...), angemeldete Sitzungen im Admin-Bereich, WordPress-Cron und die Joomla-API mit Tokens (nur Anzahl). Das ist der Ort, an dem sich Angreifer festsetzen, wenn sie die Seite verlassen müssen. Rohtexte werden nicht gespeichert, Passwörter in Befehlszeilen werden maskiert.
+- Support-Ende (seit 2.2): Meldet, wenn die Joomla-Reihe keine Sicherheitsfixes mehr bekommt oder bald nicht mehr bekommt (Termine nach endoflife.date, Stand angegeben). Bei WordPress gibt es keine festen Fristen; das Programm nennt, wie weit die Reihe zurückliegt.
+- Sicherungs-Tool vorhanden? (seit 2.2): Erkennt Akeeba Backup, UpdraftPlus, Duplicator, BackWPup, WPvivid u. a. und ob sie eingeschaltet sind. Es prüft nicht, wann zuletzt gesichert wurde und wo die Sicherungen liegen. Fehlt ein Tool, bietet das Programm bei den Lösungen die Installation an (siehe Kapitel 5).
+- .htaccess-Blöcke (seit 2.2): Regeln zwischen "# BEGIN Name" und "# END Name" werden dem Programm zugeordnet (Wordfence, Solid Security, All In One WP Security, Sucuri, BulletProof, Admin Tools, WordPress-Kern u. a.). Der Inhalt wird trotzdem geprüft, ein Block-Name mildert keine Bewertung. Unbekannte Blöcke werden aufgelistet.
+- Tech Doku (seit 2.2): In der Dokumentation zeigt der Reiter "Tech Doku" zu jeder Prüfung und Aktion die echten Befehle, Abfragen, Skripte und Funktionen aus dem Programmcode mit Erklärung. Er ist durchsuchbar und hat Kopieren-Knöpfe.
+- Vergleich mit gespeicherter Basis (seit 2.4): Speichert auf Wunsch Pfade und Prüfsummen deiner Code-Dateien nur auf deinem Computer und meldet später neue, geänderte und gelöschte Dateien. Nach Updates die Basis neu speichern. Seit 2.4.1 erinnert die Auswahlseite beim Öffnen: "Letzter Vergleich vor X Tagen"; ab 14 Tagen erscheint ein Hinweis. Es gibt keinen Hintergrunddienst, die Anzeige entsteht nur, wenn du das Programm öffnest. Vermerkt wird nur der Zeitpunkt des letzten Vergleichs, auf deinem Computer.
+- Plugin-Dateien gegen das Original (seit 2.4, WordPress): Vergleicht installierte Plugins mit den Prüfsummen von wordpress.org. Premium-Plugins sind "nicht prüfbar".
+- Skimmer-Suche (seit 2.4): Sucht Code, der Kartendaten ausliest und an fremde Adressen sendet. Ein Treffer ist ein Hinweis, kein Beweis.
+- Joomla-API ohne Anmeldung (seit 2.4): Ein einzelner Abruf, nur bei Joomla 4.0.0 bis 4.2.7 oder unbekannter Version; die Antwort wird nie gezeigt.
+- Weitere Installationen mit Schnellscan (seit 2.4): Auf Wunsch eine kurze, lesende Untersuchung von höchstens 10 Zweitinstallationen.
+- Genauere Dateiprüfung (seit 2.4): PHP-Code in Bild- und Textdateien, Auswertung der Statusänderung (ctime), Abruf von Sicherungen anderer Tools von außen und eine Positivliste bekannter Erweiterungen gegen Fehlalarme.
+- E-Mail-Absender der Domain (seit 2.4.1): Fragt über den Server die öffentlichen DNS-Einträge für SPF, DMARC und DKIM ab (höchstens 10 Abfragen). Bei DKIM werden nur gängige Namen geprüft; "nicht gefunden" ist dort kein Befund. Ohne DNS-Werkzeug auf dem Server meldet CLAUDIA ehrlich "nicht prüfbar".
+- Beim Hoster ändern (seit 2.5.0): Im Ergebnis fasst CLAUDIA alle Punkte zusammen, die nur dein Hoster ändern kann (zum Beispiel gesperrte PHP-Funktionen, PHP-Version, Mailserver), und bereitet dazu eine Mail an den Support vor. Das ist nur eine Anzeige und eine Hilfe zum Formulieren; nichts wird gesendet oder geändert. Der Bericht enthält dieselbe Liste. Eine leere Liste beweist nicht, dass die Seite sauber ist.
+
+## security | 9. Was das Programm tut und was nicht
+- Prüfungen lesen nur. Es wird nichts verändert, gelöscht oder installiert.
+- Es werden nur verschlüsselte Verbindungen benutzt: SSH/SFTP zum Server und https für Online-Abfragen.
+- Passwörter und API-Schlüssel werden nirgends gespeichert oder exportiert; Berichte werden zusätzlich auf bekannte Geheimnisse durchsucht.
+- Das Programm hört nur auf 127.0.0.1. Der Zugang geht über einen Startschlüssel, der nur ein Mal und nur kurz gilt und nur an das eigene Programmfenster geht; danach gilt ein Sitzungs-Cookie, ohne Schlüssel in der Seite. Ein normaler Browser-Tab oder ein Skript auf dem PC kommt damit nicht hinein. Fehlgeschlagene Anmeldungen am Server werden gebremst (nach 5 Fehlern 10 Minuten Pause).
+- Grenze dieses Schutzes: Er hält fremde Skripte und andere Browser-Seiten fern, nicht jemanden, der auf deinem PC den Programmcode ändert.
+- Grenzen: Erkennung beruht auf bekannten Mustern und Listen mit einem Stand; neue Angriffe kennt es nicht. Online-Quellen (Prüfsummen, JED, Safe Browsing) hängen von deiner Internetverbindung ab. Die Erweiterungs-Updates per Kommandozeile wurden nur gegen Testumgebungen geprüft. Ob ps, crontab und ssh-keygen auf deinem Hosting verfügbar sind, hängt vom Hoster ab; fehlen sie, meldet die Prüfung ihre Grenze statt zu raten. Der Speicherort der Joomla-API-Tokens ist aus der Dokumentation bekannt, nicht gegen jede Joomla-Version geprüft.
+- Freeware, ohne jegliche Gewährleistung oder Erfolgsgarantie. Änderungen am Server auf eigene Gefahr.
+- Quellen und Marken: Joomla! ist eine Marke von Open Source Matters, WordPress eine Marke der WordPress Foundation; CLAUDIA ist ein unabhängiges Programm und wird von beiden nicht unterstützt. Länderflaggen: Twemoji Country Flags (Schrift MIT, Grafik CC BY 4.0, Twitter/X und Mitwirkende).
+
+## languages | 10. Sprachen
+Deutsch und Englisch; umschalten mit den Flaggen oben rechts (nicht während eines Laufs). Das Programm wählt beim Start die Sprache des PCs; deine Wahl wird gespeichert. Auch Berichte und Dokumentation folgen der Sprache.
+- Sprachdateien liegen in claudia/lang/<code>.json und enthalten nur den abweichenden Text; Deutsch ist die Quelle. Nicht übersetzte Sätze erscheinen deutsch.
+- Neue Sprache anlegen: python tools/i18n.py neu fr "Français", danach die leeren Einträge übersetzen, eine Flagge als SVG eintragen und mit python tools/i18n.py check fr prüfen.
+- Starten mit fester Sprache: python -m claudia --lang en oder Umgebungsvariable CLAUDIA_LANG.
+- Die englische Fassung ist maschinell erstellt und nicht von einer Muttersprachlerin oder einem Muttersprachler geprüft.
+
+## trouble | 11. Wenn etwas nicht klappt
+- "Servername wurde nicht gefunden": Tippfehler oder keine Internetverbindung.
+- "Verbindung abgelehnt" oder Zeitüberschreitung: SSH ist beim Hoster nicht aktiviert, der Port stimmt nicht oder eine Firewall blockiert ihn.
+- "Anmeldung abgelehnt": Benutzer oder Passwort falsch; manche Hoster haben ein eigenes SSH-Passwort.
+- "Schlüssel des Servers hat sich geändert": nach einem Serverumzug normal, sonst Vorsicht. Beim Hoster nach dem Fingerabdruck fragen; zum Zurücksetzen den Eintrag in bekannte_server.json löschen.
+- "Verzeichnis existiert nicht": Ordner relativ zum Login-Ordner angeben; nach dem Test werden vorhandene Ordner vorgeschlagen.
+- Prüfungen "übersprungen": meist fehlt ein Recht oder ein Programm auf dem Server; der Grund steht im Ergebnis.
+- Warnung von Windows oder Virenscanner (SmartScreen, Defender): Das ist zu erwarten und in einem Punkt richtig. CLAUDIA kann SSH-Verbindungen zu einem Server aufbauen, und das ist genau ihre Aufgabe. Sie tut es nur, wenn du es willst: Zugangsdaten gibst du selbst ein, die Prüfung startest du selbst, die Verbindung geht nur zu dem eingetragenen Server, nichts läuft im Hintergrund. Weitere Gründe: Das Programm ist nicht code-signiert, und start.bat kann Python herunterladen und installieren. Lade nur aus dem offiziellen Repository, vergleiche mit PRUEFSUMMEN.txt, und erlaube im Virenscanner nur den CLAUDIA-Ordner. Schalte den Schutz nicht allgemein aus.
+- Diagnose: .venv\Scripts\python.exe -m claudia --selftest
+- "PHP-Auswahlprogramm": Manche Hoster haben ein "php", das nur nach der Version fragt. Das Programm sucht dann ein echtes PHP (php8.3 usw.). Findet es keines, bewertet es PHP-Werte nicht, statt falsch zu warnen.
+
+## files | 12. Was gespeichert wird
+- Profile ohne Passwort und bestätigte Fingerabdrücke: %APPDATA%\Claudia
+- Einstellungen (Sprache): einstellungen.json im selben Ordner
+- Berichte (nur wenn du speicherst): Dokumente\Claudia\Berichte
+- Gesicherte Protokolle: Dokumente\Claudia\Protokolle
+- Zum Aufräumen genügt es, diese Ordner zu löschen.
+- Deinstallieren: Knopf "Deinstallieren" oben im Programm oder im Startfenster. Die Liste zeigt, was das Programm angelegt hat (Python-Umgebung .venv, Zwischenspeicher, Startprotokoll; optional Verbindungen, Berichte, Programmordner und ein von start.bat installiertes Python). Gelöscht wird nur Angehaktes, nach Bestätigung und nach dem Beenden des Programms; das Löschfenster zeigt jeden Schritt. Verbindungen, Berichte und Programmordner sind nie vorgewählt.

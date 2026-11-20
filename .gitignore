@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+.venv/
+.idea/
+.vscode/
+dist/
+build/
+*.egg-info/
+Claudia_v*.zip
+Claudia_Dokumentation.html
+# local data / reports (never commit)
+berichte/
+protokolle/
+bekannte_server.json
+profile.json
+einstellungen.json
+
+# Arbeitsdateien des Entwicklers: nur lokal und im Zip, nie im Repository
+UEBERGABE_*.md
+claudia_projekt.json
+tools/overview_notes.json

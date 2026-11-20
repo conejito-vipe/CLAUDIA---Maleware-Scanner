@@ -1,0 +1,55 @@
+CLAUDIA - Was das Programm tut (und was nicht)
+==============================================
+
+Ehrlich vorweg
+--------------
+- Das Paket ist NICHT digital signiert. Eine echte Signatur braucht ein Zertifikat, das auf eine Person oder Firma
+  ausgestellt ist und Geld kostet. Das konnte hier nicht erstellt werden.
+- Es wurde NICHT mit einem Virenscanner geprüft. Wer "virenfrei" behauptet, ohne gescannt zu haben, täuscht dich.
+  Prüfe es selbst (siehe unten).
+- Es ist als "von Claude erstellt" gekennzeichnet (siehe LIZENZ.txt und die Fußzeile der Oberfläche).
+
+Warum Windows oder ein Virenscanner trotzdem warnen kann
+--------------------------------------------------------
+Das Programm baut eine SSH-Verbindung zu einem Server auf, installiert beim ersten Start Python-Bausteine und ist weder
+signiert noch weit verbreitet. Das sind Merkmale, auf die Schutzprogramme vorsichtig reagieren (SmartScreen:
+"Der Computer wurde durch Windows geschützt"). Das Programm versucht NICHT, solche Prüfungen zu umgehen, und das wäre
+auch der falsche Weg. Stattdessen ist alles offen lesbar (reine Textdateien, kein verschleierter Code).
+
+Was das Programm tut
+--------------------
+- Öffnet eine Oberfläche NUR auf deinem PC (Adresse 127.0.0.1, zufälliger Port, Zugangs-Token). Nichts davon ist von außen erreichbar.
+- Verbindet sich per SSH NUR mit dem Server, den du selbst eingibst, und führt dort lesende Befehle aus (find, grep, cat, SELECT ...).
+- Ruft deine eigene Webseite wie ein Besucher ab. Außerdem fragt dein PC (nicht der Server) ausschließlich über https folgende öffentliche
+  Quellen ab; übertragen werden nur Versionsnummern, Erweiterungsnamen oder Dateipfade in der Adresse, keine Zugangsdaten und keine Berichte:
+  extensions.joomla.org (Liste verwundbarer Erweiterungen, Verzeichnis), update.joomla.org und github.com / raw.githubusercontent.com
+  (Original-Dateien und Prüfsummen von Joomla), api.wordpress.org (Prüfsummen, Versionen), updates.drupal.org und ftp.drupal.org (Drupal: Versionen,
+  Original-Paket), get.typo3.org (TYPO3: Versionen, Original-Paket, Prüfsumme) und packagist.org (TYPO3: Sicherheitsmeldungen zu Paketnamen und
+  Versionen), services.nvd.nist.gov (CVE-Einträge) und
+  nur wenn du einen eigenen Schlüssel einträgst: safebrowsing.googleapis.com (Google Safe Browsing). Ohne Internet bleibt der eingebaute Stand aktiv.
+- Speichert Passwörter nie. Profile enthalten keine Passwörter. Berichte enthalten keine Passwörter, IP-Adressen sind gekürzt.
+- Sendet nichts an den Hersteller, keine Statistik, nichts an Anthropic. Der Knopf "An Claude übergeben" öffnet nur
+  die Claude-Webseite in deinem Browser und legt Text in die Zwischenablage; hochgeladen wird die Datei von DIR.
+- Startfenster: start.bat startet das Programm mit einem Startfenster statt eines schwarzen Fensters. Dabei wird nur ausgeführt, was im
+  Startfenster als Schritt steht (venv anlegen, "pip install -r requirements.txt" von pypi.org beim ersten Start, Selbsttest,
+  lokaler Server auf 127.0.0.1). Das Protokoll steht in %APPDATA%\Claudia\launcher.log.
+- Mac (ab 2.9.0): start.command arbeitet genauso: Es lädt Python nur von www.python.org/ftp/python, prüft mit pkgutil die Signatur (Python Software Foundation) und installiert es erst nach deiner Passworteingabe in macOS. Es ist eine Textdatei und lässt sich vorher lesen.
+- Python: Fehlt Python, lädt start.bat einmalig den offiziellen Installer von python.org (www.python.org/ftp/python), prüft seine digitale Signatur
+  (Herausgeber muss die Python Software Foundation sein; sonst wird nichts ausgeführt) und installiert Python nur für dein Benutzerkonto.
+  Die Skripte claudia\python_setup.ps1 und claudia\make_shortcut.ps1 sind Textdateien, du kannst sie vorher lesen. Protokoll: %APPDATA%\Claudia\start.log.
+- API-Schlüssel (Google Safe Browsing): bleibt nur im Arbeitsspeicher, wird nie gespeichert und in Berichten maskiert.
+- Datenbank-Passwort (Bereich "Datenbank"): bleibt nur im Arbeitsspeicher, wird dem mysql-Programm auf dem Server über die
+  Standardeingabe übergeben (nicht in der Befehlszeile), nie gespeichert und aus allen Berichten entfernt.
+- Ändert auf dem Server nichts, außer du bestätigst eine Aktion unter "Lösungen auf Knopfdruck" (feste Befehle, vorher angezeigt,
+  bei Risiko zuerst mit geprüfter Sicherung).
+
+So prüfst du das Paket selbst
+-----------------------------
+1. Unversehrtheit: Doppelklick auf pruefen.bat vergleicht jede Datei mit PRUEFSUMMEN.txt (SHA-256). Die Prüfsumme der ZIP-Datei
+   selbst steht in der Nachricht, mit der du sie bekommen hast.
+2. Virenscan: Rechtsklick auf die ZIP -> Defender, oder lade sie auf https://www.virustotal.com hoch (Treffer einzelner exotischer
+   Scanner bei unsignierten Skripten sind möglich; entscheidend ist, ob große Hersteller melden).
+3. Quelltext: start.bat und alle Dateien im Ordner claudia\ sind Textdateien. Du kannst sie in Notepad lesen.
+4. Falls Defender fälschlich warnt: Datei bei Microsoft als Fehlalarm melden
+   (https://www.microsoft.com/wdsi/filesubmission) und erst danach entscheiden, ob du sie ausführst.
+   Füge nie pauschal Ausnahmen für ganze Ordner hinzu, wenn du dem Paket nicht vertraust.

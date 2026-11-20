@@ -1,0 +1,635 @@
+{
+ "stand": "2026-10-25",
+ "hinweis": "Diese Liste stammt aus der Recherche zu einem konkreten Vorfall (öffentliche Sicherheitshinweise) und ist NICHT vollständig. Sie ersetzt keine Herstellerinformation. Du kannst Einträge ergänzen: einfach in dieser Datei ein weiteres Objekt unter 'extensions' hinzufügen.",
+ "joomla": {
+  "latest_known": "6.2.0",
+  "note": "Stand der Liste. Neuere Versionen können inzwischen erschienen sein."
+ },
+ "allow_hosts": [
+  "joomla.org",
+  "w3.org",
+  "schema.org",
+  "gravatar.com",
+  "github.com",
+  "githubusercontent.com",
+  "google.com",
+  "gstatic.com",
+  "googleapis.com",
+  "googletagmanager.com",
+  "google-analytics.com",
+  "youtube.com",
+  "youtube-nocookie.com",
+  "ytimg.com",
+  "vimeo.com",
+  "facebook.com",
+  "instagram.com",
+  "elfsight.com",
+  "cloudflare.com",
+  "cdnjs.cloudflare.com",
+  "jsdelivr.net",
+  "unpkg.com",
+  "fontawesome.com",
+  "fonts.googleapis.com",
+  "fonts.gstatic.com",
+  "bootstrapcdn.com",
+  "jquery.com",
+  "openstreetmap.org",
+  "gnu.org",
+  "apache.org",
+  "mozilla.org",
+  "paypal.com",
+  "stripe.com",
+  "elfsightcdn.com",
+  "linkedin.com",
+  "licdn.com",
+  "facebook.net",
+  "twitter.com",
+  "spotify.com",
+  "soundcloud.com",
+  "pinterest.com",
+  "sociablekit.com"
+ ],
+ "ioc_strings": [
+  "whitellllshop",
+  "landers/type.php"
+ ],
+ "known_bad_filenames": [
+  "c99.php",
+  "r57.php",
+  "wso.php",
+  "b374k.php",
+  "shell.php",
+  "cmd.php",
+  "alfa.php",
+  "bypass.php",
+  "uploader.php",
+  "lock360.php",
+  "leaf.php",
+  "adminer.php",
+  "phpinfo.php",
+  "xmlrpc.php",
+  "wp-login.php"
+ ],
+ "spam_words": [
+  "viagra",
+  "cialis",
+  "casino",
+  "payday",
+  "loans",
+  "porn",
+  "xxx",
+  "replica",
+  "slots",
+  "betting",
+  "poker",
+  "escort",
+  "essay",
+  "pharmacy",
+  "levitra",
+  "tramadol"
+ ],
+ "extensions": [
+  {
+   "id": "jce",
+   "title": "JCE Editor",
+   "cve": "CVE-2026-48907",
+   "element_regex": "^(com_jce|jce|plg_editors_jce)$",
+   "name_regex": "(^|[^a-z])jce([^a-z]|$)",
+   "fixed_in": "2.9.99.5",
+   "recommended": "2.9.99.7",
+   "severity": "crit",
+   "note": "Ältere Versionen erlauben das Einschleusen eines Web-Shells in tmp/ und das Anlegen fremder Editor-Profile (#__wf_profiles). Wurde aktiv ausgenutzt."
+  },
+  {
+   "id": "tassos",
+   "title": "Tassos Framework (nrframework)",
+   "cve": "CVE-2026-21627",
+   "element_regex": "^(nrframework|plg_system_nrframework)$",
+   "name_regex": "nrframework|tassos.*framework",
+   "fixed_in": "6.0.62",
+   "recommended": "6.0.62",
+   "severity": "crit",
+   "note": "Ältere Versionen sind über den Aufruf plugin=nrframework&task=include angreifbar. Wird von Convert Forms, Smile Pack u. a. mitgebracht."
+  },
+  {
+   "id": "convertforms",
+   "title": "Convert Forms",
+   "cve": "CVE-2026-65758 / CVE-2026-77026",
+   "element_regex": "^(com_convertforms|convertforms|plg_system_convertforms)$",
+   "name_regex": "convert ?forms",
+   "fixed_in": "5.2.5",
+   "recommended": "5.2.5",
+   "severity": "crit",
+   "note": "Versionen vor 5.2.5 enthalten bekannte Sicherheitslücken."
+  },
+  {
+   "id": "helix",
+   "title": "Helix Ultimate (JoomShaper)",
+   "cve": "",
+   "element_regex": "^(helixultimate|plg_system_helixultimate)$",
+   "name_regex": "helix ?ultimate",
+   "fixed_in": "2.2.8",
+   "recommended": "2.2.8",
+   "severity": "warn",
+   "note": "Laut Hinweis des Herstellers ab 2.2.8 behoben (keine CVE-Nummer in der Recherche)."
+  },
+  {
+   "id": "sppagebuilder",
+   "title": "SP Page Builder (JoomShaper)",
+   "cve": "CVE-2026-48908",
+   "element_regex": "^com_sppagebuilder$",
+   "name_regex": "sp ?page ?builder",
+   "fixed_in": "",
+   "recommended": "",
+   "severity": "warn",
+   "note": "Von einer Sicherheitslücke betroffen. Die behobene Version war in der Recherche nicht eindeutig - bitte die neueste Version des Herstellers installieren."
+  },
+  {
+   "id": "t4pagebuilder",
+   "title": "T4 Page Builder (JoomlArt)",
+   "cve": "CVE-2026-78374",
+   "element_regex": "^(com_t4pagebuilder)$",
+   "name_regex": "t4 ?page ?builder",
+   "fixed_in": "2.3.0",
+   "recommended": "2.3.0",
+   "severity": "crit",
+   "note": "Versionen vor 2.3.0 lassen sich ohne Anmeldung als Mail-Relay missbrauchen (Spam/Phishing über deine Domain)."
+  }
+ ],
+ "log_patterns": [
+  {
+   "id": "jce_import",
+   "title": "JCE: Profil-Import (Angriffsmuster CVE-2026-48907)",
+   "regex": "com_jce[^ \"]*profiles\\.import|profiles\\.import[^ \"]*com_jce",
+   "severity": "crit"
+  },
+  {
+   "id": "nrframework_include",
+   "title": "Tassos Framework: task=include (Angriffsmuster CVE-2026-21627)",
+   "regex": "plugin=nrframework[^ \"]*task=include|task=include[^ \"]*plugin=nrframework",
+   "severity": "crit"
+  },
+  {
+   "id": "php_in_tmp",
+   "title": "Zugriff auf PHP-Datei in tmp/ (typischer Web-Shell-Aufruf)",
+   "regex": "\"(GET|POST|HEAD) /tmp/[^ ?\"]+\\.(php|phtml|php5)",
+   "severity": "crit"
+  },
+  {
+   "id": "php_in_uploads",
+   "title": "Zugriff auf PHP-Datei in images/media/cache/files",
+   "regex": "\"(GET|POST|HEAD) /(images|media|cache|files|administrator/cache)/[^ ?\"]+\\.(php|phtml|php5|phar)",
+   "severity": "crit"
+  },
+  {
+   "id": "sqli",
+   "title": "SQL-Injection-Versuche",
+   "regex": "union(%20|\\+| )+(all(%20|\\+| )+)?select|information_schema|benchmark\\(|sleep\\([0-9]",
+   "severity": "warn"
+  },
+  {
+   "id": "traversal",
+   "title": "Verzeichnis-Traversal (../)",
+   "regex": "\\.\\./\\.\\./|%2e%2e%2f|%252e%252e",
+   "severity": "warn"
+  },
+  {
+   "id": "rce",
+   "title": "Code-Ausführungs-Versuche (eval, php://input ...)",
+   "regex": "base64_decode|eval\\(|php://input|allow_url_include|auto_prepend_file",
+   "severity": "warn"
+  },
+  {
+   "id": "admin_post",
+   "title": "Anmeldeversuche am Admin-Bereich (POST)",
+   "regex": "\"POST /administrator/(index\\.php)?[ ?]",
+   "severity": "info"
+  },
+  {
+   "id": "wp_probe",
+   "title": "WordPress-/xmlrpc-Scans (Hintergrundrauschen)",
+   "regex": "wp-login\\.php|wp-admin|xmlrpc\\.php",
+   "severity": "info"
+  }
+ ],
+ "jed": {
+  "hinweis": "Adressen im Joomla-Verzeichnis (extensions.joomla.org/extension/<name>/). Nur Eintraege, deren Adresse geprueft wurde.",
+  "slugs": {
+   "akeebabackup": "akeeba-backup",
+   "convertforms": "convert-forms",
+   "cgwebp": "cg-webp",
+   "aimycanonical": "aimy-canonical",
+   "jce": "jce",
+   "osmap": "osmap",
+   "osmeta": "osmeta",
+   "cookiehint": "cookiehint"
+  },
+  "family": {
+   "akwarn": "akeebabackup",
+   "nrframework": "convertforms"
+  },
+  "bundled": [
+   "tinymce",
+   "codemirror",
+   "none"
+  ]
+ },
+ "database_eol": [
+  {
+   "engine": "mysql",
+   "branch": "5.5",
+   "eol": "2018-12-31"
+  },
+  {
+   "engine": "mysql",
+   "branch": "5.6",
+   "eol": "2021-02-28"
+  },
+  {
+   "engine": "mysql",
+   "branch": "5.7",
+   "eol": "2023-10-31"
+  },
+  {
+   "engine": "mysql",
+   "branch": "8.0",
+   "eol": "2026-04-30"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.1",
+   "eol": "2020-10-17"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.2",
+   "eol": "2022-05-23"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.3",
+   "eol": "2023-05-25"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.4",
+   "eol": "2024-06-18"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.5",
+   "eol": "2025-06-24"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.6",
+   "eol": "2026-07-06"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.7",
+   "eol": "2023-02-09"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.8",
+   "eol": "2023-05-20"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.9",
+   "eol": "2023-08-22"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.10",
+   "eol": "2023-11-17"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "11.0",
+   "eol": "2024-06-07"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "11.1",
+   "eol": "2024-08-21"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "11.2",
+   "eol": "2024-11-21"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "11.3",
+   "eol": "2024-02-27"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "10.11",
+   "eol": "2028-02-16"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "11.4",
+   "eol": "2029-05-19"
+  },
+  {
+   "engine": "mariadb",
+   "branch": "11.8",
+   "eol": "2028-06-04"
+  },
+  {
+   "engine": "mysql",
+   "branch": "8.4",
+   "eol": "2032-04-30"
+  }
+ ],
+ "database_incidents": [
+  {
+   "id": "CVE-2023-23752",
+   "title": "Joomla 4.0.0 bis 4.2.7: Webservice gab Konfigurationswerte frei, darunter das Datenbank-Passwort",
+   "from": "4.0.0",
+   "to": "4.2.7",
+   "fixed": "4.2.8",
+   "sev": "crit",
+   "note": "War ohne Anmeldung über die Adresse /api/index.php/v1/config/application abrufbar. Wurde massenhaft ausgenutzt. Wenn die Seite in dieser Zeit mit einer betroffenen Version lief: Datenbank-Passwort erneuern."
+  },
+  {
+   "id": "CVE-2017-8917",
+   "title": "Joomla 3.7.0: SQL-Injection über com_fields",
+   "from": "3.7.0",
+   "to": "3.7.0",
+   "fixed": "3.7.1",
+   "sev": "crit",
+   "note": "Erlaubte das Auslesen der Datenbank ohne Anmeldung, darunter Benutzer und Passwort-Hashes. Wurde massenhaft ausgenutzt."
+  },
+  {
+   "id": "CVE-2015-7297",
+   "title": "Joomla 3.2.0 bis 3.4.4: SQL-Injection im Kern (zusammen mit CVE-2015-7857 und -7858)",
+   "from": "3.2.0",
+   "to": "3.4.4",
+   "fixed": "3.4.5",
+   "sev": "crit",
+   "note": "Erlaubte die Übernahme von Administrator-Sitzungen. Wurde massenhaft ausgenutzt."
+  }
+ ],
+ "wordpress": {
+  "latest_known": "7.0.1",
+  "note": "Stand der Liste. Neuere Versionen können inzwischen erschienen sein; die Online-Prüfung fragt api.wordpress.org."
+ },
+ "wp_plugins": [
+  {
+   "slug": "wp-file-manager",
+   "title": "WP File Manager",
+   "cve": "CVE-2020-25213",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "6.9",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 6.8 erlauben das Hochladen beliebiger Dateien ohne Anmeldung (Web-Shell). Wurde massenhaft ausgenutzt."
+  },
+  {
+   "slug": "duplicator",
+   "title": "Duplicator",
+   "cve": "CVE-2020-11738",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "1.3.28",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 1.3.26 erlauben das Herunterladen beliebiger Dateien (z. B. wp-config.php) ohne Anmeldung."
+  },
+  {
+   "slug": "ultimate-member",
+   "title": "Ultimate Member",
+   "cve": "CVE-2023-3460",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "2.6.7",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 2.6.6 erlauben die Rechteausweitung bis zum Administrator ohne Anmeldung."
+  },
+  {
+   "slug": "essential-addons-for-elementor-lite",
+   "title": "Essential Addons for Elementor",
+   "cve": "CVE-2023-32243",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "5.7.2",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen vor 5.7.2 erlauben das Zurücksetzen beliebiger Passwörter (Übernahme des Administrator-Kontos)."
+  },
+  {
+   "slug": "wp-automatic",
+   "title": "WordPress Automatic",
+   "cve": "CVE-2024-27956",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "3.92.1",
+   "severity": "crit",
+   "sqli": true,
+   "note": "Versionen vor 3.92.1 sind per SQL-Injection angreifbar; wurde zum Anlegen von Administrator-Konten ausgenutzt."
+  },
+  {
+   "slug": "litespeed-cache",
+   "title": "LiteSpeed Cache",
+   "cve": "CVE-2024-28000",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "6.4",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen vor 6.4 erlauben die Rechteausweitung bis zum Administrator ohne Anmeldung."
+  },
+  {
+   "slug": "really-simple-ssl",
+   "title": "Really Simple Security",
+   "cve": "CVE-2024-10924",
+   "kind": "plugin",
+   "from": "9.0.0",
+   "fixed_in": "9.1.2",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Die Versionen 9.0.0 bis 9.1.1 erlauben die Umgehung der Anmeldung (Zugriff auf jedes Konto, auch Administrator)."
+  },
+  {
+   "slug": "backup-backup",
+   "title": "Backup Migration",
+   "cve": "CVE-2023-6553",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "1.3.8",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 1.3.7 erlauben das Ausführen beliebigen PHP-Codes ohne Anmeldung."
+  },
+  {
+   "slug": "social-warfare",
+   "title": "Social Warfare",
+   "cve": "CVE-2019-9978",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "3.5.3",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 3.5.2 erlauben das Ausführen beliebigen Codes ohne Anmeldung."
+  },
+  {
+   "slug": "wp-gdpr-compliance",
+   "title": "WP GDPR Compliance",
+   "cve": "CVE-2018-19207",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "1.4.3",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 1.4.2 erlauben das Ändern von Einstellungen und das Anlegen von Administratoren."
+  },
+  {
+   "slug": "forminator",
+   "title": "Forminator",
+   "cve": "CVE-2023-4596",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "1.25.0",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 1.24.6 erlauben das Hochladen von PHP-Dateien über Formulare ohne Anmeldung."
+  },
+  {
+   "slug": "post-smtp",
+   "title": "Post SMTP",
+   "cve": "CVE-2023-6875",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "2.8.8",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 2.8.7 erlauben die Umgehung der Anmeldung (Übernahme von Konten)."
+  },
+  {
+   "slug": "wp-fastest-cache",
+   "title": "WP Fastest Cache",
+   "cve": "CVE-2023-6063",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "1.2.2",
+   "severity": "crit",
+   "sqli": true,
+   "note": "Versionen bis 1.2.1 sind per SQL-Injection ohne Anmeldung angreifbar."
+  },
+  {
+   "slug": "royal-elementor-addons",
+   "title": "Royal Elementor Addons",
+   "cve": "CVE-2023-5360",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "1.3.79",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 1.3.78 erlauben das Hochladen beliebiger Dateien (Web-Shell) ohne Anmeldung."
+  },
+  {
+   "slug": "contact-form-7",
+   "title": "Contact Form 7",
+   "cve": "CVE-2020-35489",
+   "kind": "plugin",
+   "from": "",
+   "fixed_in": "5.3.2",
+   "severity": "warn",
+   "sqli": false,
+   "note": "Versionen vor 5.3.2 erlauben unter Umständen das Hochladen unerwünschter Dateitypen über Formulare."
+  },
+  {
+   "slug": "bricks",
+   "title": "Bricks Builder (Theme)",
+   "cve": "CVE-2024-25600",
+   "kind": "theme",
+   "from": "",
+   "fixed_in": "1.9.6.1",
+   "severity": "crit",
+   "sqli": false,
+   "note": "Versionen bis 1.9.6 erlauben das Ausführen beliebigen PHP-Codes ohne Anmeldung."
+  }
+ ],
+ "wp_known_bad_files": [
+  "wp-vcd.php",
+  "wp-tmp.php",
+  "wp-feed.php",
+  "class.theme-modules.php",
+  "wp-cache-config.php.bak",
+  "wp-config.php.bak",
+  "wp-config.php.old",
+  "wp-config.php.save",
+  "wp-config.php~",
+  "wp-config.php.orig",
+  "wp-config.txt"
+ ],
+ "hinweis_wp": "Die Liste der WordPress-Plugins ist eine kleine Auswahl bekannter, schwerwiegender Fälle und NICHT vollständig. Für die aktuelle Lage dient die Online-Prüfung (api.wordpress.org) sowie wordfence.com/threat-intel und patchstack.com/database.",
+ "cms_eol": {
+  "stand": "2026-11-07",
+  "quelle": "https://endoflife.date/joomla (Seitenstand 14.10.2026), Fahrplan unter https://developer.joomla.org/roadmap.html und https://docs.joomla.org/Joomla!_CMS_versions; WordPress: https://wordpress.org/documentation/article/supported-versions/",
+  "hinweis": "Joomla-Termine nach endoflife.date, nicht gegen jede Ankündigung des Projekts einzeln geprüft. Bei WordPress gibt es keine festen Fristen: nur die neueste Hauptversion gilt als unterstützt, ältere Reihen bekommen Sicherheitsfixes nur aus Kulanz.",
+  "joomla": [
+   {"branch": "3", "active_end": "2021-08-17", "eol": "2023-08-17"},
+   {"branch": "4", "active_end": "2024-10-15", "eol": "2025-10-14"},
+   {"branch": "5", "active_end": "2026-10-13", "eol": "2027-10-12"},
+   {"branch": "6", "active_end": "2028-10-17", "eol": "2029-10-16"}
+  ]
+ },
+ "php_eol": [
+  {
+   "branch": "5.6",
+   "eol": "2018-12-31"
+  },
+  {
+   "branch": "7.0",
+   "eol": "2018-12-03"
+  },
+  {
+   "branch": "7.1",
+   "eol": "2019-12-01"
+  },
+  {
+   "branch": "7.2",
+   "eol": "2020-11-30"
+  },
+  {
+   "branch": "7.3",
+   "eol": "2021-12-06"
+  },
+  {
+   "branch": "7.4",
+   "eol": "2022-11-28"
+  },
+  {
+   "branch": "8.0",
+   "eol": "2023-11-26"
+  },
+  {
+   "branch": "8.1",
+   "eol": "2025-12-31"
+  },
+  {
+   "branch": "8.2",
+   "eol": "2026-12-31"
+  },
+  {
+   "branch": "8.3",
+   "eol": "2027-12-31"
+  },
+  {
+   "branch": "8.4",
+   "eol": "2028-12-31"
+  },
+  {
+   "branch": "8.5",
+   "eol": "2029-12-31"
+  }
+ ]
+}

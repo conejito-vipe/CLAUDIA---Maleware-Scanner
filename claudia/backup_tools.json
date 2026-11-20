@@ -1,0 +1,106 @@
+{
+  "stand": "2026-11-07",
+  "hinweis": "Sicherungs-Erweiterungen. Die Auswahl ist bewusst klein und nennt nur Werkzeuge, deren Kennung (WordPress: Slug im Verzeichnis wordpress.org; Joomla: Seite im Joomla Extensions Directory) geprüft wurde. Eine Sicherung ersetzt keine Updates. Sie hilft, wenn etwas schiefgeht, und nur, wenn sie außerhalb des Webspaces liegt und sich zurückspielen lässt.",
+  "joomla": [
+    {
+      "id": "akeeba",
+      "name": "Akeeba Backup",
+      "developer": "Akeeba Ltd",
+      "price": "kostenlos (Pro-Version kostenpflichtig)",
+      "jed": "https://extensions.joomla.org/extension/akeeba-backup",
+      "paths": [
+        "com_akeebabackup",
+        "com_akeeba",
+        "akeebabackup",
+        "akeeba",
+        "pkg_akeeba"
+      ],
+      "text": "Sichert Dateien und Datenbank der Seite als ein Archiv und stellt sie auf einem neuen Server oder derselben Seite wieder her (mit dem Skript Kickstart). Die kostenlose Version genügt für den Einstieg, die Pro-Version kann zusätzlich auf Cloud-Speicher übertragen. Der Standard in der Joomla-Welt.",
+      "dirs": [
+        "administrator/components/com_akeebabackup/backup",
+        "administrator/components/com_akeeba/backup"
+      ],
+      "install": {
+        "manifest": "https://cdn.akeebabackup.com/updates/pkgakeebacore.xml",
+        "element": "pkg_akeebabackup"
+      }
+    }
+  ],
+  "wordpress": [
+    {
+      "id": "akeeba",
+      "name": "Akeeba Backup for WordPress",
+      "slug": "akeebabackupwp",
+      "paths": [
+        "akeebabackupwp"
+      ],
+      "text": "Sichert Dateien und Datenbank als ein Archiv und stellt sie auch auf einem anderen Server wieder her (Skript Kickstart). Kostenlos, die Pro-Version überträgt zusätzlich in Cloud-Speicher.",
+      "dirs": [
+        "wp-content/plugins/akeebabackupwp/app/backups"
+      ]
+    },
+    {
+      "id": "updraftplus",
+      "name": "UpdraftPlus",
+      "slug": "updraftplus",
+      "paths": [
+        "updraftplus"
+      ],
+      "text": "Zeitgesteuerte Sicherungen von Dateien und Datenbank, Wiederherstellung mit einem Klick im Dashboard, kostenlose Übertragung zu Cloud-Diensten wie Google Drive oder Dropbox. Kostenlos, mit Bezahlversion.",
+      "dirs": [
+        "wp-content/updraft"
+      ]
+    },
+    {
+      "id": "duplicator",
+      "name": "Duplicator",
+      "slug": "duplicator",
+      "paths": [
+        "duplicator"
+      ],
+      "text": "Packt die ganze Seite in ein Archiv, auch zum Umziehen auf einen anderen Server. Die kostenlose Version macht manuelle Sicherungen, zeitgesteuerte und Cloud-Ziele sind in der Bezahlversion.",
+      "dirs": [
+        "wp-snapshots",
+        "wp-content/backups-dup-lite",
+        "wp-content/backups-dup-pro",
+        "wp-content/backups-dup-lite/tmp"
+      ]
+    },
+    {
+      "id": "backwpup",
+      "name": "BackWPup",
+      "slug": "backwpup",
+      "paths": [
+        "backwpup"
+      ],
+      "text": "Zeitgesteuerte Sicherungen von Dateien und Datenbank, wahlweise auf FTP, Dropbox oder andere Ziele. Kostenlos, mit Bezahlversion.",
+      "dirs": [
+        "wp-content/uploads/backwpup-*-backups"
+      ]
+    },
+    {
+      "id": "wpvivid",
+      "name": "WPvivid Backup",
+      "slug": "wpvivid-backuprestore",
+      "paths": [
+        "wpvivid-backuprestore"
+      ],
+      "text": "Sicherung, Wiederherstellung und Umzug mit Zeitplan und Cloud-Zielen in der kostenlosen Version. Mit Bezahlversion für weitere Funktionen.",
+      "dirs": [
+        "wp-content/wpvividbackups"
+      ]
+    },
+    {
+      "id": "aiowpmigration",
+      "name": "All-in-One WP Migration",
+      "paths": [
+        "all-in-one-wp-migration"
+      ],
+      "background": true,
+      "text": "Exportiert die ganze Seite als eine Datei (.wpress). Gedacht für Umzüge, taugt als manuelle Sicherung, hat aber keinen Zeitplan in der kostenlosen Version.",
+      "dirs": [
+        "wp-content/ai1wm-backups"
+      ]
+    }
+  ]
+}

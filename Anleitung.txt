@@ -1,0 +1,301 @@
+CLAUDIA - Anleitung
+===================
+
+Was ist das?
+------------
+Ein Programm für deinen Windows-PC, das eine Joomla-, WordPress-, Drupal- oder TYPO3-Seite über SSH auf Spuren eines Hacks und auf
+typische Schwachstellen prüft. Es liest nur. Es ändert, löscht oder installiert nichts auf dem Server.
+Es lässt sich für beliebig viele Seiten verwenden: Zugangsdaten werden jedes Mal von Hand eingegeben.
+
+Voraussetzungen
+---------------
+- Windows 10 oder 11, oder ein Mac mit macOS 11 oder neuer (ab 2.9.0, siehe Abschnitt "Mac"), mit Internetverbindung (nur bei der ersten Einrichtung nötig).
+- Ein SSH-Zugang zum Webspace. Bei vielen Hostern muss er im Kundenmenü erst aktiviert werden.
+  Du brauchst: Servername, Benutzername, Passwort (oder Schlüsseldatei) und den Ordner, in dem Joomla liegt.
+- Python 3.9 oder neuer. Fehlt es, lädt start.bat es selbst von python.org herunter, prüft die digitale Signatur und installiert es nur für dein Benutzerkonto
+  (kein Administrator nötig, kein Neustart und kein zweiter Doppelklick). Protokoll: %APPDATA%\Claudia\start.log.
+
+Warnung von Windows oder Virenscanner (zu erwarten)
+---------------------------------------------------
+Windows (SmartScreen, Defender) oder ein Virenscanner kann vor CLAUDIA oder start.bat warnen oder sie als Schadsoftware bzw.
+mögliches Einfallstor einstufen. Das ist nachvollziehbar und in einem Punkt richtig: CLAUDIA kann SSH-Verbindungen zu einem Server
+aufbauen, genau so arbeitet das Programm. Es tut das nur, wenn du es willst: Du gibst die Zugangsdaten selbst ein, startest selbst
+eine Prüfung, die Verbindung geht nur zum eingetragenen Server, nichts läuft im Hintergrund. Weitere Gründe: nicht code-signiert,
+und start.bat kann Python herunterladen und installieren. Nur aus dem offiziellen Repository laden, mit PRUEFSUMMEN.txt vergleichen,
+im Virenscanner nur den CLAUDIA-Ordner erlauben, den Schutz nicht allgemein ausschalten.
+
+Starten
+-------
+1. ZIP-Datei in einen normalen Ordner ENTPACKEN (Rechtsklick -> Alle extrahieren), z. B. auf den Desktop.
+   Nicht direkt aus dem ZIP heraus starten.
+2. Doppelklick auf  start.bat  (die einzige Startdatei)
+   - Es öffnet sich ein Startfenster in der Mitte des Bildschirms. Es zeigt jeden Schritt, die aktuelle Ausgabe und den
+     Fortschritt in Prozent. Beim ersten Mal richtet das Programm sich selbst ein (ein bis zwei Minuten). Es installiert nichts
+     im restlichen System, alles liegt im Unterordner ".venv".
+   - Fehlt Python, richtet start.bat es automatisch ein (Download von python.org, ca. 25 MB, ein bis zwei Minuten) und startet danach von selbst weiter.
+   - Beim ersten Start legt start.bat die Verknüpfung CLAUDIA.lnk mit dem Eichhörnchen-Symbol im Programmordner an (eine .bat-Datei kann selbst kein Symbol tragen). Ab dann diese Verknüpfung benutzen; sie lässt sich auf den Desktop kopieren.
+   - Zeigt Windows "Der Computer wurde durch Windows geschützt", klicke auf "Weitere Informationen" und
+     dann auf "Trotzdem ausführen". Die Datei ist eine einfache Textdatei, du kannst sie vorher in
+     Notepad ansehen.
+3. Danach öffnet sich der Browser mit der Oberfläche. Das kleine Startfenster bleibt offen und darf klein bleiben.
+   Beenden: das X oben rechts im Programmfenster oder "Beenden" im Startfenster. Das Fenster öffnet mittig und lässt sich an Rändern und Ecken in der Größe ändern.
+   Bei einem Fehler zeigt das Startfenster die Meldung und die Datei launcher.log (im Ordner
+   %APPDATA%\Claudia) enthält das Protokoll.
+
+Mac (ab 2.9.0; noch nicht auf einem echten Mac getestet)
+--------------------------------------------------------
+1. ZIP-Datei im Finder entpacken (Doppelklick) und den Ordner z. B. nach "Dokumente" legen.
+2. Doppelklick auf  start.command . Beim ersten Mal meldet macOS evtl., die Datei könne nicht geöffnet werden:
+   Rechtsklick auf start.command > Öffnen > Öffnen. Geht das nicht, im Programm Terminal in den Ordner wechseln (cd) und  bash start.command  eingeben.
+3. Ein Terminal-Fenster zeigt die Einrichtung. Fehlt Python 3.9 oder neuer, lädt start.command es von python.org (ca. 45 MB), prüft die
+   digitale Signatur (Python Software Foundation) und installiert es; dafür fragt macOS nach deinem Mac-Passwort. Danach richtet sich CLAUDIA
+   beim ersten Start einmalig ein (ca. 80 MB) und öffnet ein eigenes Fenster mit normalem Fensterrahmen. Das Terminal-Fenster darf geschlossen werden.
+4. Programmdaten: ~/Library/Application Support/CLAUDIA (dort auch start.log), Berichte: ~/Documents/CLAUDIA/Berichte.
+
+Ablauf in der Oberfläche
+------------------------
+1. Verbindung
+   Server, Port (meist 22), Benutzer, Passwort, Joomla-Ordner und Webadresse eintragen, dann
+   "Verbindung testen". Beim ersten Mal erscheint der Fingerabdruck des Servers. Vergleiche ihn mit
+   der Angabe deines Hosters, wenn dieser sie anzeigt, und bestätige ihn.
+   Während des Tests läuft ein Countdown (höchstens 45 Sekunden) mit den einzelnen Schritten. "Abbrechen" ist
+   jederzeit möglich. Danach zeigt das Programm Joomla-Version, PHP-Version und das gefundene Datenbank-Programm.
+   Ist der Ordner falsch, schlägt es vorhandene Ordner zum Anklicken vor.
+   Die PHP-Version erkennt das Programm selbst: erst aus der Antwort deiner Webseite, dann aus den .htaccess-Zeilen, dann aus den
+   laufenden PHP-Prozessen deines Kontos. Gelingt das nicht, steht dort "nicht erkannt". Eintragen musst du nichts.
+2. Tests auswählen
+   - Schnellcheck: die wichtigsten Prüfungen, wenige Minuten.
+   - Nach einem Hack: alles Wichtige inklusive Datenbank und Zugriffsprotokoll (Empfehlung nach einem Vorfall).
+   - Komplett: alle Tests.
+   Bei jedem Test erklärt "Details", was genau passiert, warum es wichtig ist und was gelesen wird.
+   Tests mit "dauert länger" belasten den Server kurz etwas, laufen aber mit niedriger Priorität.
+3. Prüfung
+   Jedes Feld im Streifen steht für einen Test und färbt sich, wenn das Ergebnis da ist.
+   Mit "Abbrechen" stoppst du sauber, die bis dahin fertigen Ergebnisse bleiben erhalten.
+4. Ergebnis
+   Gesamtbewertung, Filter nach Schweregrad, zu jedem Befund eine Empfehlung.
+
+Farben
+------
+Grün = in Ordnung | Blau = Hinweis | Gelb = bitte prüfen | Rot = kritisch | Grau = übersprungen/fehlgeschlagen
+
+Wichtig zur Bewertung
+---------------------
+Das Programm sucht nach bekannten Spuren. "Keine Auffälligkeiten" heißt NICHT, dass eine Seite nachweislich
+sauber ist, sondern nur, dass diese Prüfungen nichts gefunden haben. Gelb und Rot sind Anlässe zum Nachsehen,
+keine Beweise: Manche Treffer sind harmlos (z. B. eine Entwicklerdatei, die ein Template mitliefert).
+Die Vergleichsliste mit bekannten Schwachstellen (claudia/advisories.json) hat einen Stand (steht im Bericht).
+Neuere Lücken kennt das Programm nicht.
+
+Ergebnisse weitergeben (Auswertung durch Claude)
+------------------------------------------------
+Im Ergebnis gibt es zwei Knöpfe:
+- "ZIP für die Auswertung herunterladen": ein ZIP mit bericht.txt, ergebnisse.json, den Rohdaten und
+  einer kurzen LIES_MICH.txt. Dieses ZIP kannst du in den Chat hochladen.
+- "Alle Berichte als Dateien speichern": legt einen Ordner an unter
+  Dokumente\Claudia\Berichte\<server>_<datum>\ mit zusätzlich bericht.html (schön lesbar,
+  druckbar) und fuer_claude.zip.
+Kein Bericht enthält Passwörter. Zugangsdaten aus der configuration.php sind unkenntlich gemacht,
+IP-Adressen sind standardmäßig gekürzt (abschaltbar unter "Weitere Einstellungen").
+Die Berichte enthalten trotzdem Dateinamen, Befunde und Pfade deiner Seite: nur an Personen
+weitergeben, denen du das auch erzählen würdest.
+
+Datenbank-Tests ohne mysql auf dem Server
+-----------------------------------------
+Die Datenbank wird über das Programm "mysql" auf dem Server gelesen, mit den Zugangsdaten aus der
+configuration.php (nur SELECT-Abfragen). Gibt es das Programm nicht, erzeugt das Programm stattdessen die Datei
+phpmyadmin_abfragen.sql. Diese Abfragen führst du einzeln im phpMyAdmin (Reiter "SQL") aus und
+schickst mir das Ergebnis als CSV oder Screenshot.
+
+Gespeichert wird
+----------------
+- Profile (ohne Passwort):        %APPDATA%\Claudia\profile.json
+- Bestätigte Server-Fingerabdrücke: %APPDATA%\Claudia\bekannte_server.json
+- Berichte (nur wenn du speicherst): Dokumente\Claudia\Berichte
+Zum Aufräumen genügt es, diese Ordner zu löschen.
+
+Wenn etwas nicht klappt
+-----------------------
+- "Servername wurde nicht gefunden": Tippfehler im Servernamen, oder keine Internetverbindung.
+- "Verbindung abgelehnt" / "Zeitüberschreitung": SSH ist beim Hoster nicht aktiviert, der Port stimmt nicht,
+  oder eine Firewall blockiert Port 22.
+- "Anmeldung abgelehnt": Benutzername oder Passwort falsch. Bei manchen Hostern gibt es ein eigenes
+  SSH-Passwort, das vom Kundenpasswort abweicht.
+- "Schlüssel des Servers hat sich geändert": nach einem Serverumzug normal, sonst Vorsicht. Beim Hoster
+  nach dem aktuellen Fingerabdruck fragen. Zum Zurücksetzen den Eintrag in bekannte_server.json löschen.
+- "Verzeichnis existiert nicht": Der Joomla-Ordner wird relativ zum Login-Ordner angegeben (z. B. "html" oder
+  "htdocs/meineseite"). Nach einem Verbindungstest werden die vorhandenen Ordner vorgeschlagen.
+- Einzelne Tests "übersprungen": Meist fehlt dafür ein Recht oder ein Programm auf dem Server. Der Grund steht
+  im Ergebnis.
+- Diagnose: In einer Eingabeaufforderung im Programmordner
+      .venv\Scripts\python.exe -m claudia --selftest
+  zeigt, ob Python, der SSH-Baustein und die Ordner in Ordnung sind.
+
+Nach der Prüfung
+----------------
+Nach Änderungen (Passwörter ändern, Dateien löschen, Updates) die Prüfung wiederholen und die beiden
+Berichte vergleichen. Zuerst die roten Befunde bearbeiten.
+
+
+Neu in Version 1.1 (nach dem ersten echten Lauf)
+-------------------------------------------------
+- Verbindungstest mit Countdown, eigener Zeitgrenze pro Schritt und Abbrechen-Knopf.
+- PHP-Version und Datenbank-Programm werden unabhängig voneinander gesucht (auch php8.3 u. ä.).
+- Keine Fehlalarme mehr für: Bilder/Schriften (Zufallstreffer auf "<?="), Joomla-Cache-Dateien, leere index.php,
+  radio.php und andere übliche Namen, SQL-Skripte von Erweiterungen, Schutzregeln in .htaccess,
+  jquery-noconflict.js und jQuery-Plugins, Untererweiterungen mit Version 1.0, Update-Wellen,
+  Daten-Dateien mit langen Zeilen, JSON-LD im Quelltext, Scanner-Zeilen (404) im Joomla-Protokoll.
+- Angriffsversuche im Zugriffsprotokoll sind nur noch "kritisch", wenn eine Anfrage mit 2xx beantwortet wurde.
+  Abgewehrte Versuche (403/404/301) erscheinen als Hinweis mit Zeitraum, Absendern und Adressen.
+- Backup-Dateien auf dem Server werden im Test "Webseite aus Besuchersicht" automatisch wie von einem Besucher
+  abgerufen: 403/404 = gesperrt, 200 = öffentlich herunterladbar (kritisch).
+
+
+Neu in Version 1.2
+------------------
+- "An Claude übergeben" (im Ergebnis): speichert die Berichte, öffnet den Ordner mit markierter fuer_claude.zip, öffnet Claude im
+  Browser und legt einen fertigen Text in die Zwischenablage. Du fügst den Text ein und ziehst die ZIP in den Chat. Das Programm
+  lädt selbst nichts hoch (es kennt dein Claude-Konto nicht und soll es nie kennen).
+- Online-Abgleich "Aktuelle Joomla-Liste verwundbarer Erweiterungen": lädt die offizielle Liste von extensions.joomla.org und
+  vergleicht sie mit deinen Erweiterungen. Ist das Internet nicht erreichbar, bleibt der eingebaute Abgleich aktiv.
+- Test "Erweiterungen im offiziellen Joomla-Verzeichnis (JED) nachschlagen" (nur unter "Komplett"): zeigt Hersteller und Anzahl der
+  Nutzerbewertungen, soweit die Seite gefunden wird. Das Verzeichnis hat keine offizielle Such-Schnittstelle, das Programm
+  rät die Adresse. "Nicht gefunden" heißt deshalb nicht "unseriös".
+- Lösungen auf Knopfdruck (Ergebnis-Seite, ganz unten): feste Aktionen mit Vorschau der Befehle und ausdrücklicher Bestätigung:
+  Schreibrechte für "alle" entfernen, Cache leeren und Joomla aktualisieren (die Update-Suche startet das Programm selbst). Das Joomla-Update legt vorher eine
+  Sicherung (Datenbank + Dateien) im Ordner ~/claudia-sicherung-<datum> auf dem Server an, prüft sie und bricht ohne gültige Sicherung ab.
+  (Ab Version 1.4 siehe unten: auch Erweiterungen, tmp-Ordner, JCE-Profile, Schadcode-Dateien; ab 1.5 Reihenfolge, Ausschnitte, alte Sicherungen.)
+  Du brauchst dafür ein funktionierendes PHP-Programm auf dem Server; das Programm lässt dich die Version wählen (z. B. php-8.3).
+- Die Fehlalarme aus der Auswertung von Cache-Dateien, Erweiterungs-Updates und der PHP-Version sind weiter reduziert.
+- Platzhalter in den Eingabefeldern sind allgemein (google.de).
+- LIZENZ.txt (Freeware), SICHERHEIT.txt (was das Programm tut, Hinweise zu Windows-Warnungen), pruefen.bat (Dateien gegen PRUEFSUMMEN.txt prüfen).
+
+
+Neu in Version 1.3
+------------------
+- "Protokolle auf deinen PC sichern" (Seite "Tests auswählen", oben): kopiert die Zugriffs- und Fehlerprotokolle deines Hosters
+  (und auf Wunsch die Joomla-Protokolle aus administrator/logs) auf deinen Rechner. Hintergrund: Hoster wie hosting.de löschen
+  alte Protokolle automatisch, danach lässt sich ein Einbruch nicht mehr nachvollziehen.
+  * Auf dem Server wird nur gelesen (Dateiliste und Kopie), nichts verändert oder gelöscht.
+  * Erst "Protokolle suchen", dann Bestätigung, dann "Jetzt sichern". Es erscheint ein Fortschrittsbalken, Abbruch ist möglich.
+  * Jede Datei wird auf die Byte-Größe geprüft; ihre SHA-256-Prüfsumme steht in SICHERUNG_PRUEFSUMMEN.txt.
+  * Beim nächsten Mal werden nur neue oder geänderte Dateien kopiert. Eine geänderte Datei überschreibt die alte nicht,
+    sie wird mit Zeitstempel im Namen zusätzlich abgelegt.
+  * Speicherort: Dokumente\Claudia\Protokolle\<servername>\  (Knopf "Ordner öffnen").
+  * Auswerten: Test "Zugriffsprotokoll von diesem PC auswerten" wählen und diesen Ordner als Pfad eintragen.
+  * Datenschutz: Zugriffsprotokolle enthalten IP-Adressen. Der Ordner bleibt auf deinem PC und kommt NICHT in die ZIP für Claude.
+    Bewahre ihn nur so lange auf, wie du ihn brauchst.
+  * Empfehlung: etwa alle 4 Wochen wiederholen, so lange wie dein Hoster Protokolle vorhält.
+
+
+Neu in Version 1.4
+------------------
+- Startbildschirm statt schwarzem Fenster (ab 1.5 über die einzige Startdatei start.bat): zeigt, was gerade im Hintergrund passiert
+  (Python prüfen, Umgebung anlegen, SSH-Baustein laden, Selbsttest, Server starten, Browser öffnen) mit Fortschritt in Prozent.
+  Der Prozentwert ist eine Schätzung nach festen Gewichten der Schritte; der Download beim ersten Start kann länger dauern.
+  Das X oben rechts beendet das Programm. Schließt du das Startfenster, endet auch der Hintergrundserver.
+- Neuer Text im Bereich "Lösungen auf Knopfdruck" (mehr Abstand, Hervorhebung in Rot/Fett).
+- Alle angezeigten Befehle stehen in einem Codefenster (rote Tönung) mit Knopf "Kopieren".
+- "Joomla aktualisieren" erscheint nur, wenn ein Update bekannt ist (nach "Nach Updates suchen" oder laut Prüfung).
+- Erweiterungs-Updates: Nach "Nach Updates suchen" zeigt das Programm Erweiterungen mit offiziellem, kostenlosem Update zum Anklicken.
+  Vorher wird eine vollständige Sicherung angelegt und geprüft; installiert wird je Erweiterung einzeln und danach die Version in der
+  Datenbank kontrolliert. Bei einem Fehler wird abgebrochen. Erweiterungen mit Download-Schlüssel (kostenpflichtig) werden nicht
+  angeboten. Neue Hauptversionen sind nicht vorausgewählt. Wichtig: Dieser Weg (Joomla-Befehl "extension:install" mit der
+  Download-Adresse aus dem Update-Verzeichnis) wurde nur gegen Testumgebungen geprüft, nicht an einem echten Server. Mache zuerst
+  ein Update einer unwichtigen Erweiterung und prüfe die Seite.
+- Statusfenster: Beim Ausführen einer Aktion zeigt ein Fenster live jeden Befehl, die Antwort des Servers und am Ende eine
+  Erfolgs- oder Fehlermeldung. Passwörter und Schlüssel sind darin geschwärzt. "Protokoll kopieren" ist möglich.
+- "tmp-Ordner leeren": sichert den Inhalt des Joomla-tmp-Ordners als tmp.tgz auf dem Server, prüft die Sicherung und löscht dann den
+  Inhalt (index.html und .htaccess bleiben). Der Ordner dient oft als Einfallstor für abgelegte Schadskripte, ist aber keine Sicherung.
+- "Schädliche JCE-Profile löschen": entfernt nur Profile, in denen PHP-Code steht (erneut geprüft), nach Sicherung der Tabelle.
+  Die Standardprofile von JCE bleiben geschützt.
+- "Schadcode-Dateien entfernen": löscht nur die Dateien, die die Prüfung als Webshell gemeldet hat (und PHP-Dateien in images/),
+  nach einer Sicherung als Archiv. Eingeschleusten Code innerhalb normaler Dateien (z. B. ein eval() in einer Vorlage) entfernt das
+  Programm NICHT automatisch; das muss von Hand oder mit Hilfe von Claude/einem Fachmann geschehen.
+- Korrektur im Test "Erweiterungen im offiziellen Joomla-Verzeichnis (JED)": Erweiterungen, die zu einer Hauptkomponente gehören
+  (Plugins, Module) oder von Joomla mitgeliefert werden, zählen nicht mehr als "nicht gefunden". Konnte das Verzeichnis nicht
+  abgerufen werden, steht dort "nicht abrufbar" statt "nicht gefunden".
+
+
+Neu in Version 1.5
+------------------
+Startdatei und Fenster
+- Es gibt nur noch EINE Startdatei: start.bat. Das Startfenster ist größer, steht mittig auf dem Bildschirm und zeigt die Knöpfe sicher.
+- Die PHP-Version wird erkannt (siehe oben), sonst steht "nicht erkannt". Das Eingabefeld dafür ist entfernt.
+
+Tests in Clustern, neuer Bereich "Datenbank"
+- Zusammengehörige Tests stehen in der Auswahl in einem Cluster: eine Klammer am linken Rand, darüber der Name des Vorgehens
+  (z. B. "Injection prüfen", "PHP nach Shells durchsuchen") und eine Beschreibung, was dort passiert. "Cluster auswählen/abwählen"
+  schaltet alle Tests der Klammer um.
+- Neuer, OPTIONALER Bereich "Datenbank (optional, eigene Verbindung)". Er ist in keiner Voreinstellung außer "Komplett" enthalten.
+  Oben im Bereich steht die Karte "Datenbank-Verbindung":
+  * Standard: Das Programm nutzt die Zugangsdaten aus der configuration.php der Seite.
+  * "Eigene Zugangsdaten verwenden": Felder Host, Port, Benutzer, Datenbank, Tabellenpräfix und Passwort. "Aus dem Server übernehmen"
+    füllt alles außer dem Passwort aus der configuration.php vor. Ein Passwort lässt du leer (dann gilt das aus der configuration.php)
+    oder trägst es selbst ein, z. B. für einen eigenen Benutzer mit Leserechten. Es bleibt nur im Arbeitsspeicher, wird nie gespeichert
+    und nie in Berichte geschrieben.
+  * "Verbindung testen" zeigt sofort, ob es klappt (Fehlermeldung mit Ursache, wenn nicht).
+  Die Tests dieses Bereichs betreffen nur die Datenbank und arbeiten nur lesend:
+  * Datenbank-Server und Rechte des Zugangs: Version gegen den Support-Zeitraum von MySQL/MariaDB, zu weitreichende Rechte (FILE, SUPER, alle Datenbanken).
+  * Datenbank auf eingeschleusten Code durchsuchen (Cluster "Injection prüfen"): alle Textspalten aller Tabellen, mit Tabelle, Spalte und Ausschnitt.
+    Bekannte Dienste (z. B. YouTube) werden nur gezählt. Auf großen Datenbanken kann das einige Minuten dauern.
+  * Auffälligkeiten im Aufbau: fremde Tabellen, Views, Trigger, zeitgesteuerte Ereignisse, gespeicherte Prozeduren, frisch angelegte Tabellen,
+    angemeldete Administratoren.
+  * Aktuelle Sicherheitsvorfälle: Joomla-Version gegen bekannte Datenbank-Vorfälle (z. B. CVE-2023-23752, bei dem Datenbank-Passwörter
+    ohne Anmeldung auslesbar waren) und die Erweiterungen aus der Datenbank gegen die aktuelle Joomla-Liste verwundbarer Erweiterungen
+    (SQL-Injection wird hervorgehoben; braucht Internet von deinem PC).
+  Grenze: Die Version/Vorfall-Listen haben einen Stand (Datei claudia/advisories.json). Neuere Vorfälle kennt nur die Online-Liste.
+
+Lösungen auf Knopfdruck
+- Die Update-Suche startet das Programm selbst, sobald das Ergebnis da ist. Du siehst den Status (sucht / fertig / fehlgeschlagen mit
+  "Erneut suchen") und dann direkt die Updates. Ursache des früheren Abbruchs war die mysqldump-Option --connect-timeout ("unknown
+  variable") bei manchen Hostern; sie wird nicht mehr verwendet, und ohne --no-tablespaces versucht das Programm es ebenfalls.
+- Empfohlene Reihenfolge, nummeriert, mit "Warum jetzt?": 1. Sicherung, 2. JCE-Profile (sonst entstehen neue Hintertüren),
+  3. Hintertüren und PHP in images, 4. Temp-Ordner (tmp und images/tmp, unkritisch), 5. Code in Dateien von Hand, 6. Passwörter erneuern,
+  7. Cache, 8. Prüfung wiederholen, am Ende: alte Sicherungen löschen. Es erscheinen nur Schritte, die für deine Seite nötig sind.
+- "Temp-Ordner leeren" leert tmp und images/tmp (nach Sicherung) und zeigt vorher, was dort liegt.
+- "Alte Sicherungen löschen": zeigt alle claudia-sicherung-Ordner und Archive auf dem Server mit Größe und Datum zum Ankreuzen. Gelöscht wird nur, was du
+  auswählst, und nur Namen aus dem Muster des Programms. Die neueste bleibt auf Wunsch stehen.
+- JCE-Profile: Scheitert die Sicherung, bietet das Programm zusätzlich "Profile trotzdem löschen (ohne Sicherung)" an, mit eigener
+  Bestätigung. Dann gibt es keine Kopie.
+- Schadcode von Hand entfernen: Das Programm zeigt für jede Fundstelle einen Ausschnitt mit Zeilennummern. Die Schadstelle ist rot
+  markiert, die Zeilen davor und danach (grau) dienen zur Orientierung, darunter steht die Zeile nach der Korrektur zum Kopieren.
+  Das Programm ändert die Datei NICHT selbst. Die rote Markierung ist eine Hilfe, kein Urteil: Prüfe vorher, ob du die Adresse oder
+  den Code kennst. Mache eine Kopie der Datei, bevor du sie bearbeitest.
+
+
+Neu in Version 1.5.1
+--------------------
+- Fußzeile/Lizenztext neu formuliert (Freeware, ohne jegliche Gewährleistung oder Erfolgsgarantie, Änderungen auf eigene Gefahr).
+- Updates stehen in einer eigenen Karte "Updates" ganz oben auf der Ergebnis-Seite, direkt unter der Gesamtbewertung: Suche mit Status,
+  Joomla-Update und Erweiterungs-Updates. Unten bei "Lösungen auf Knopfdruck" bleiben die übrigen Schritte.
+- Erweiterungs-Updates: Schlägt eine Installation fehl, geht das Programm zuerst die übrigen Erweiterungen durch und versucht die
+  fehlgeschlagenen bis zu 3 weitere Male (manche Erweiterungen brauchen eine andere, die erst danach aktuell ist). Jeder Versuch steht im Statusfenster.
+- Erweiterungen, deren Installer nicht über die Kommandozeile läuft (Beispiel OSMap/Alledia: "Cannot assign ConsoleApplication to property ..."),
+  werden nicht wiederholt. Das Programm zeigt dann die Download-Adresse (zum Kopieren) und den Weg über das Joomla-Backend:
+  System -> Aktualisieren oder ZIP unter System -> Installieren -> Erweiterungen hochladen.
+- Temp-Ordner: Das Programm prüft, ob images/tmp wirklich existiert, und nennt den Ordner nur dann. Gibt es ihn nicht, steht das so da. Zusätzlich
+  zeigt es andere Ordner namens tmp/temp unter images an (werden nicht automatisch geleert).
+- Schadcode von Hand entfernen: Bei Dateien, die zum offiziellen Joomla gehören (Kernverzeichnisse, Vorlage Cassiopeia), vergleicht das Programm
+  mit dem Original derselben Joomla-Version (Abruf von GitHub von deinem PC aus) und zeigt die Originalzeile GRÜN unter der roten Schadzeile.
+  Hat das Original die Zeile nicht, steht dort "im Original gibt es diese Zeile nicht: ganz löschen". Bei Vorlagen und Erweiterungen von
+  Drittanbietern gibt es kein Original; die grüne Zeile ist dann die Zeile ohne die rote Stelle. Grün = bleibt, Rot = weg, Grau = Orientierung.
+  Grenze: Der Abgleich ordnet die Zeilen über die Nachbarzeilen zu. Ist die Datei stark verändert, sagt das Programm "nicht sicher zuordenbar".
+- Schädliche JCE-Profile: Direkt am Befund ("N JCE-Profile erwähnen 'php' ...") gibt es den Knopf "Diese JCE-Profile über die Datenbank löschen ...".
+  Er öffnet die Vorschau der Befehle; gelöscht wird erst nach deiner Bestätigung (mit Sicherung der Tabelle, oder ohne, falls die Sicherung scheitert).
+  Entsprechende Knöpfe gibt es bei Hintertüren, PHP in images und Schreibrechten.
+
+Neu in Version 2.0.0 (CLAUDIA)
+------------------------------
+Ausführlich mit "Was / Warum / Wie": Knopf "Hilfe" oben rechts im Programm oder die Datei Claudia_Dokumentation.html (mit Suche, Deutsch/Englisch).
+- Neuer Name CLAUDIA mit Logo und Claim; technische Symbole statt Emoticons in Oberfläche und Berichten.
+- WordPress-Bereich (eigene Erkennung, Prüfungen und Aktionen).
+- Deutsch und Englisch (Flaggen oben rechts); Sprachdateien in claudia\lang, weitere Sprachen leicht ergänzbar (tools\i18n.py).
+- Neue Prüfungen: Joomla-Kern gegen Original-Prüfsummen (und Kern neu einspielen), PHP-Einstellungen, Integrität der Konfigurationsdatei,
+  Google Safe Browsing (eigener Schlüssel), aktuelle Bedrohungslage (VEL, NVD/CVE), Malware-Muster, versteckte Strukturen, .htaccess,
+  Sicherheits-Erweiterung vorhanden (mit JED-Bewertungen), Update-Tauglichkeit.
+- Nur verschlüsselte Verbindungen; die Art der Verschlüsselung steht in der Verbindungsanzeige.
+- Alte Sicherungen und alte Aktionsprotokolle lassen sich löschen (jeweils die neueste bleibt auf Wunsch).
+- Aufruf: python -m claudia --lang en  (oder Umgebungsvariable CLAUDIA_LANG).
+Grenzen: Online-Quellen und Erweiterungs-Updates per Kommandozeile wurden nur gegen Testumgebungen geprüft; WordPress ebenfalls nur gegen eine
+künstliche Testseite; die englische Fassung ist maschinell übersetzt und nicht von Muttersprachlern geprüft.
