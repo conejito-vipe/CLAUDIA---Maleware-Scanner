@@ -2,7 +2,7 @@
 ### Lizenz neu gefasst
 Was: Die Lizenz (LICENSE, LIZENZ.txt, Abschnitt in den READMEs) ist neu: kostenlos nur für Privatpersonen und gemeinnützige Organisationen, keine kommerzielle Nutzung, keine Änderung und keine Weitergabe ohne Zustimmung des Urhebers. Parteien und Gruppen, die vom Verfassungsschutz als rechtsextremistische Bestrebung eingestuft oder verboten sind, sind ausgeschlossen. Die Fußzeile heißt jetzt "vibecoded" und nennt conejito-vipe.
 Warum: Die bisherige Freeware-Lizenz erlaubte berufliche Nutzung, Änderung und Weitergabe. Das ist nicht mehr gewollt. Die Anknüpfung an den Verfassungsschutz macht den Ausschluss nachprüfbar.
-Wie: Reine Text-Änderung; am Programm und an den Prüfungen ändert sich nichts. Grenze: Das ist keine Rechtsberatung.
+Wie: Reine Text-Änderung; am Programm und an den Prüfungen ändert sich nichts.
 ## 2.10.0 | 2026-11-19 | TYPO3
 ### TYPO3-Seiten werden erkannt und geprüft
 Was: CLAUDIA erkennt jetzt TYPO3 (ab Version 11, klassische und Composer-Installation; ältere Versionen werden erkannt und als nicht mehr unterstützt gemeldet) und zeigt eigene Prüfungen: Kern (Version, Support-Ende, Sicherheitsmeldungen, Vergleich aller Dateien der Systemerweiterungen mit dem Original-Paket von get.typo3.org), Einstellungsdatei (settings.php und additional.php: auffällige Befehle, Fehlerausgabe, devIPmask, trustedHostsPattern, Schlüssellänge, Passwortverfahren, Schreibrechte, freigeschaltetes Install-Tool), frei abrufbare Dateien und Install-Tool, Erweiterungen (Sicherheitsmeldungen von Packagist, überholte Erweiterungen, Entwicklungs-Erweiterungen, eigene Pakete), Backend-Administratoren und Code in Inhalten und Templates. Dazu laufen die allgemeinen Prüfungen, die nichts Systemspezifisches lesen.

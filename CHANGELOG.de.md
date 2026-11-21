@@ -7,7 +7,7 @@ Erzeugt aus `claudia/docs/aenderungen.de.txt` (nicht von Hand ändern).
 ### Lizenz neu gefasst
 - **Was:** Die Lizenz (LICENSE, LIZENZ.txt, Abschnitt in den READMEs) ist neu: kostenlos nur für Privatpersonen und gemeinnützige Organisationen, keine kommerzielle Nutzung, keine Änderung und keine Weitergabe ohne Zustimmung des Urhebers. Parteien und Gruppen, die vom Verfassungsschutz als rechtsextremistische Bestrebung eingestuft oder verboten sind, sind ausgeschlossen. Die Fußzeile heißt jetzt "vibecoded" und nennt conejito-vipe.
 - **Warum:** Die bisherige Freeware-Lizenz erlaubte berufliche Nutzung, Änderung und Weitergabe. Das ist nicht mehr gewollt. Die Anknüpfung an den Verfassungsschutz macht den Ausschluss nachprüfbar.
-- **Wie:** Reine Text-Änderung; am Programm und an den Prüfungen ändert sich nichts. Grenze: Das ist keine Rechtsberatung.
+- **Wie:** Reine Text-Änderung; am Programm und an den Prüfungen ändert sich nichts.
 
 ## 2.10.0 (2026-11-19) - TYPO3
 

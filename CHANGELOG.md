@@ -7,7 +7,7 @@ Generated from `claudia/docs/aenderungen.en.txt` (do not edit by hand).
 ### License rewritten
 - **What:** The license (LICENSE, LIZENZ.txt, section in the READMEs) is new: free only for individuals and non-profit organizations, no commercial use, no modification and no redistribution without the author's consent. Parties and groups that are classified as a right-wing extremist effort by the Office for the Protection of the Constitution or that are banned are excluded. The footer now says "vibecoded" and names conejito-vipe.
 - **Why:** The previous freeware license allowed professional use, modification and redistribution. That is no longer wanted. Tying the exclusion to the Office for the Protection of the Constitution makes it verifiable.
-- **How:** Text change only; the program and the checks do not change. Limit: this is not legal advice.
+- **How:** Text change only; the program and the checks do not change.
 
 ## 2.10.0 (2026-11-19) - TYPO3
 
